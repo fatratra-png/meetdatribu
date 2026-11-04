@@ -154,3 +154,40 @@ celles-ci. Conservés tels quels : le verre 3D (phase 2) et la bande devise
     « HEI LEIS DADA AH » en géant (texte demandé, à la place de « TRIBU »),
     coupé par le bas, qui sort du flou avec un halo doré. Taille calculée pour
     15 signes (12,6vw) ; révélé dès son entrée à l'écran.
+
+## Visite 3D du campus (5 nov. 2026)
+
+42. **Emplacement** : après « Se repérer », avant la devise (validé). La frise
+    raconte la rentrée dans le temps, la visite montre le bâtiment dans
+    l'espace. Chapitre « Le campus » dans l'index.
+43. **Un seul contexte WebGL** : le verre et la maquette partagent le même
+    `WebGLRenderer` (`three/sharedRenderer.ts`) ; son canvas est déplacé dans
+    la section affichée, chaque moteur ne dessine que s'il le possède. Le
+    rendu du verre est inchangé (mêmes réglages, reposés à chaque image).
+44. **Maquette construite en code** (Three.js), pas de .glb : Blender n'est pas
+    installé. Un groupe `floor-<id>` par niveau, un mesh `room-<id>` par salle.
+    Pas de second canvas R3F : il aurait ouvert un deuxième contexte WebGL.
+45. **Agencement** : décrit par l'utilisateur (Villa Joell, salle des profs,
+    cuisine, WC filles ; salle B ; ALGÈBRE = PI + Sigma avec baie vitrée et
+    véranda, en L avec NP ; Rooftop = tout le toit) et recoupé avec la photo
+    du campus publiée par HEI. Google Maps / Street View / Earth : non
+    consultés (pas d'accès aux images ici, et rien ne devait en être extrait).
+    Toutes les dimensions sont estimées et marquées PLACEHOLDER dans
+    `src/content/campus.ts` (le seul fichier à corriger).
+46. **Retouches demandées** : WC filles retirés de la maquette (cités dans la
+    fiche de la salle B comme repère) ; escalier de gauche inversé, avec un
+    palier au 1er qui rejoint la véranda ; volée vers le toit retirée ;
+    escalier extérieur ajouté au pied de la salle B, jusqu'à la véranda de NP.
+47. **Interactions** : intro au scroll (ciel → demi-tour → entrée de Villa Joell
+    → recul pendant que les niveaux s'écartent et que le toit se soulève),
+    puis visite : points cliquables (zone de 44 px), vol de caméra GSAP, fiche
+    Framer Motion, mini-plan, recherche, filtre par niveau, glisser pour
+    tourner. Mobile : rotation automatique (en pause au toucher) + boutons,
+    fiche en bas d'écran.
+48. **Accessibilité / repli** : liste des salles au clavier toujours présente ;
+    en mouvement réduit ou sans WebGL, vue statique (image rendue par la
+    maquette elle-même) + plan + liste + fiche, sans 3D. Moteur chargé en
+    différé, un écran avant la section.
+49. **Bug corrigé** (r187) : un matériau compilé opaque ignore l'opacité ;
+    passer en transparent demande `needsUpdate` (sinon le filtre d'étage ne
+    fondait rien).

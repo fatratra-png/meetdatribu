@@ -26,7 +26,7 @@ declare global {
  * - suit la taille de son conteneur (ResizeObserver).
  */
 export default function GlassCanvas({ onFrame, onFail }: Props) {
-  const ref = useRef<HTMLCanvasElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const onFrameRef = useRef(onFrame);
   const onFailRef = useRef(onFail);
   useEffect(() => {
@@ -35,8 +35,8 @@ export default function GlassCanvas({ onFrame, onFail }: Props) {
   });
 
   useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
+    const host = ref.current;
+    if (!host) return;
     let engine: GlassEngine | null = null;
     let disposed = false;
     const observers: { disconnect: () => void }[] = [];
@@ -45,7 +45,7 @@ export default function GlassCanvas({ onFrame, onFail }: Props) {
       try {
         const svg = await (await fetch("/glass/hei-mark.svg")).text();
         if (disposed) return;
-        engine = new GlassEngine(canvas, svg, {
+        engine = new GlassEngine(host, svg, {
           getTarget: () => useScrollStore.getState().glass,
           onFrame: (s) => onFrameRef.current?.(s),
         });
@@ -53,9 +53,9 @@ export default function GlassCanvas({ onFrame, onFail }: Props) {
 
         // pause hors écran : aucune image calculée pour rien
         const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? e.start() : e.stop()));
-        io.observe(canvas);
+        io.observe(host);
         const ro = new ResizeObserver(() => e.resize());
-        ro.observe(canvas.parentElement ?? canvas);
+        ro.observe(host);
         observers.push(io, ro);
 
         window.__glassSite = {
@@ -67,7 +67,7 @@ export default function GlassCanvas({ onFrame, onFail }: Props) {
             return e.fragmentNames;
           },
         };
-        canvas.dataset.ready = "true";
+        host.dataset.ready = "true";
       } catch {
         // WebGL indisponible ou contexte refusé : image de secours, sans bruit en console
         onFailRef.current?.();
@@ -82,5 +82,6 @@ export default function GlassCanvas({ onFrame, onFail }: Props) {
     };
   }, []);
 
-  return <canvas ref={ref} className="glass-canvas" aria-hidden="true" />;
+  // conteneur du canvas partagé (voir sharedRenderer.ts)
+  return <div ref={ref} className="glass-canvas" aria-hidden="true" />;
 }

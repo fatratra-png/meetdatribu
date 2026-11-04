@@ -169,7 +169,8 @@
     "motto": "La devise",
     "advice": "Les conseils",
     "voice": "Témoignage",
-    "contact": "Contact"
+    "contact": "Contact",
+    "campus": "Le campus"
   },
   "orbit": {
     "kicker": "LA TRIBU HEI · AMBODIVOANJO, IVANDRY",
@@ -207,6 +208,39 @@
       "quote": "J'attendais d'être prêt pour coder.",
       "title": "Code un peu chaque jour.",
       "text": "Un exercice sur Mimo, une page en HTML, un petit projet : la régularité bat l'intensité."
+    }
+  },
+  "campus": {
+    "kicker": "LE CAMPUS · VISITE 3D",
+    "titleA": "Le campus,",
+    "titleIt": "étage par étage.",
+    "steps": {
+      "0": "Vue du ciel",
+      "1": "Demi-tour au-dessus de la cour",
+      "2": "L'entrée, côté cour",
+      "3": "On soulève le toit",
+      "4": "À toi : touche une salle"
+    },
+    "stillAlt": "Maquette 3D du campus HEI : un bâtiment blanc en L autour d'une cour, étages écartés, salles en bleu et toit-terrasse sous une toile",
+    "searchLabel": "Chercher une salle",
+    "searchPlaceholder": "Chercher une salle…",
+    "results": "{n, plural, =0 {Aucune salle} one {# salle trouvée} other {# salles trouvées}}",
+    "noResult": "Aucune salle ne correspond.",
+    "floorsLabel": "Choisir un étage",
+    "allFloors": "Tout",
+    "planOf": "Plan",
+    "allRooms": "Toutes les salles",
+    "rotateLeft": "Tourner la maquette",
+    "prev": "Précédente",
+    "next": "Suivante",
+    "close": "Fermer la fiche",
+    "kinds": {
+      "class": "Salle de cours",
+      "lab": "Salle machines",
+      "admin": "Administration",
+      "service": "Service",
+      "outdoor": "Extérieur",
+      "circulation": "Circulation"
     }
   }
 }

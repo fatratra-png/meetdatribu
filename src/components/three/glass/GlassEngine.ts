@@ -30,6 +30,7 @@ import {
 } from "./geometry";
 import { createGlassEnvironment, createGlassMaterial } from "./material";
 import { createBackground, createBackgroundUniforms } from "./background";
+import { claimRenderer, getSharedRenderer, ownsRenderer } from "../sharedRenderer";
 
 // ---- Réglages (valeurs du skill) ------------------------------------------
 const LOGO_HEIGHT = 3.1;
@@ -90,7 +91,8 @@ function cachedGeometry(cache: Map<string, THREE.BufferGeometry>, key: string, b
 }
 
 export class GlassEngine {
-  private canvas: HTMLCanvasElement;
+  /** Conteneur du canvas partagé (le canvas y est déplacé quand le verre s'affiche). */
+  private host: HTMLElement;
   private opts: GlassEngineOptions;
   private renderer: THREE.WebGLRenderer;
   private scene = new THREE.Scene();
@@ -113,8 +115,8 @@ export class GlassEngine {
   private elapsed = 0;
   private lastInputAt = performance.now();
 
-  constructor(canvas: HTMLCanvasElement, svgText: string, opts: GlassEngineOptions) {
-    this.canvas = canvas;
+  constructor(host: HTMLElement, svgText: string, opts: GlassEngineOptions) {
+    this.host = host;
     this.opts = opts;
 
     this.scene.background = new THREE.Color("#000000");
@@ -124,14 +126,10 @@ export class GlassEngine {
     this.scene.add(this.camera);
     createBackground(this.camera, this.uniforms);
 
-    this.renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: false,
-      powerPreference: "high-performance",
-    });
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 2.2;
+    // renderer partagé avec la maquette du campus (un seul contexte WebGL)
+    this.renderer = getSharedRenderer();
+    claimRenderer(host);
+    this.applyRenderSettings();
 
     // Lumières du skill : clé blanche, contre-jour froid, débouchage crème.
     this.scene.add(new THREE.AmbientLight("#ffffff", 0.1));
@@ -432,8 +430,21 @@ export class GlassEngine {
 
     this.updatePieces(this.currentScroll);
     this.opts.onFrame?.(this.currentScroll);
-    this.renderer.render(this.scene, this.camera);
+    this.draw();
   };
+
+  /** Réglages de rendu du verre (le renderer est partagé : on les repose). */
+  private applyRenderSettings() {
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this.renderer.toneMappingExposure = 2.2;
+  }
+
+  /** Dessine seulement si le verre possède le canvas partagé. */
+  private draw() {
+    if (!ownsRenderer(this.host)) return;
+    this.applyRenderSettings();
+    this.renderer.render(this.scene, this.camera);
+  }
 
   private placeCamera(scroll: number, follow: number) {
     const frame = this.cameraFrame(scroll);
@@ -470,18 +481,23 @@ export class GlassEngine {
 
   /** Taille du canvas = taille de son conteneur. */
   resize() {
-    const parent = this.canvas.parentElement ?? this.canvas;
-    this.size.width = Math.max(1, parent.clientWidth);
-    this.size.height = Math.max(1, parent.clientHeight);
+    this.size.width = Math.max(1, this.host.clientWidth);
+    this.size.height = Math.max(1, this.host.clientHeight);
     this.camera.aspect = this.size.width / this.size.height;
     this.camera.updateProjectionMatrix();
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_DPR));
-    this.renderer.setSize(this.size.width, this.size.height, false);
-    this.renderer.getDrawingBufferSize(this.uniforms.uResolution.value);
+    if (ownsRenderer(this.host)) {
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_DPR));
+      this.renderer.setSize(this.size.width, this.size.height, false);
+    }
+    // résolution du fond = taille du conteneur × pixel ratio plafonné
+    const dpr = Math.min(window.devicePixelRatio, MAX_DPR);
+    this.uniforms.uResolution.value.set(this.size.width * dpr, this.size.height * dpr);
     this.lastInputAt = performance.now();
   }
 
   start() {
+    // le verre reprend le canvas partagé en revenant à l'écran
+    if (claimRenderer(this.host)) this.resize();
     if (this.running) return;
     this.running = true;
     this.lastTick = 0;
@@ -503,7 +519,7 @@ export class GlassEngine {
     this.placeCamera(value, 1);
     this.updatePieces(value);
     this.uniforms.uScroll.value = value;
-    this.renderer.render(this.scene, this.camera);
+    this.draw();
   }
 
   get scroll() {
@@ -526,6 +542,6 @@ export class GlassEngine {
     for (const p of this.pieces) p.cache.forEach((g) => g.dispose());
     for (const b of this.bodies) b.cache.forEach((g) => g.dispose());
     this.disposables.forEach((d) => d.dispose());
-    this.renderer.dispose();
+    // le renderer partagé n'est PAS détruit : la maquette du campus s'en sert aussi
   }
 }

@@ -23,11 +23,9 @@
   height: 100vh; height: 100lvh;
   overflow: hidden;
 }
-.glass-canvas {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  display: block; outline: none;
-}
+.glass-canvas { position: absolute; inset: 0; }
+/* le canvas WebGL partagé (verre + campus) remplit son conteneur */
+.webgl-shared { position: absolute; inset: 0; width: 100%; height: 100%; display: block; outline: none; }
 
 .glass-slides { position: absolute; inset: 0; pointer-events: none; }
 .glass-slide { position: absolute; bottom: 12%; }

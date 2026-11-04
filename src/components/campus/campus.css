@@ -1,0 +1,160 @@
+/* ═══════════════════════════════════════════════════════════════
+   VISITE 3D DU CAMPUS — interface posée sur la maquette
+   Mêmes jetons que le reste du site : filets, mono, or = « regarde ici ».
+   ═══════════════════════════════════════════════════════════════ */
+
+.s-campus .pin { background: var(--bg); }
+.campus-host { position: absolute; inset: 0; touch-action: pan-y; }
+/* voiles dégradés : le titre (haut) et le panneau (gauche) restent lisibles
+   même quand la maquette blanche passe derrière */
+.s-campus .pin::before, .s-campus .pin::after { content: ""; position: absolute; z-index: 2; pointer-events: none; }
+.s-campus .pin::before { left: 0; right: 0; top: 0; height: 34vh; background: linear-gradient(var(--bg) 30%, transparent); }
+.s-campus .pin::after { left: 0; top: 0; bottom: 0; width: min(420px, 40vw); background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 85%, transparent), transparent); opacity: 0; transition: opacity 0.6s; }
+.s-campus.is-explore .pin::after { opacity: 1; }
+.s-campus.is-static .pin::before, .s-campus.is-static .pin::after { display: none; }
+.s-campus.is-explore .campus-host { cursor: grab; }
+.s-campus.is-explore .campus-host:active { cursor: grabbing; }
+
+.campus-head { position: absolute; left: var(--gutter); top: 12vh; z-index: 3; pointer-events: none; max-width: min(560px, 80vw); }
+.campus-head h2 { font-size: clamp(34px, 4.4vw, 66px); line-height: 1; letter-spacing: -0.04em; margin-top: 14px; }
+.campus-step { margin-top: 16px; color: var(--ink-soft); }
+
+/* points cliquables */
+.campus-spots { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+/* la zone cliquable = le point seul (cible de 44 px), l'étiquette est
+   hors flux : sinon des étiquettes invisibles recouvrent les points voisins */
+.campus-spot {
+  position: absolute; left: 0; top: 0;
+  width: 44px; height: 44px; margin: -22px 0 0 -22px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  pointer-events: auto;
+  transition: opacity 0.4s var(--ease-out);
+}
+.campus-spot[data-visible="false"] { opacity: 0; pointer-events: none; }
+.campus-dot {
+  position: relative; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.campus-dot::after {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%;
+  border: 1px solid var(--accent); animation: campus-pulse 2.2s var(--ease-out) infinite;
+}
+@keyframes campus-pulse { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+.campus-spot-label {
+  position: absolute; left: 34px; top: 50%; margin-top: -13px;
+  pointer-events: none;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
+  padding: 5px 9px; border-radius: 999px;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--hairline);
+  opacity: 0; transform: translateX(-4px);
+  transition: opacity 0.3s, transform 0.3s var(--ease-out);
+}
+.campus-spot:hover, .campus-spot:focus-visible, .campus-spot[aria-pressed="true"] { z-index: 2; }
+.campus-spot:hover .campus-spot-label,
+.campus-spot:focus-visible .campus-spot-label,
+.campus-spot[aria-pressed="true"] .campus-spot-label { opacity: 1; transform: none; }
+
+/* panneau gauche : recherche, étages, mini-plan, liste */
+.campus-panel {
+  position: absolute; left: var(--gutter); bottom: 6vh; z-index: 5;
+  width: 300px; display: grid; gap: 12px;
+  opacity: 0; transform: translateY(16px); pointer-events: none;
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.s-campus.is-explore .campus-panel { opacity: 1; transform: none; pointer-events: auto; }
+.campus-search {
+  display: flex; align-items: center; gap: 8px; padding: 0 14px;
+  background: var(--surface); border: 1px solid var(--hairline); border-radius: 999px; color: var(--ink-soft);
+}
+.campus-search input { flex: 1; min-width: 0; height: 42px; background: transparent; color: var(--ink); outline: none; font-size: 15px; }
+.campus-search:focus-within { border-color: var(--accent); }
+.campus-results, .campus-list ul { list-style: none; display: grid; gap: 2px; }
+.campus-results { background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 6px; }
+.campus-item {
+  width: 100%; display: flex; justify-content: space-between; gap: 12px; text-align: left;
+  padding: 9px 10px; border-radius: 6px; font-size: 15px;
+}
+.campus-item:hover { background: var(--hairline); }
+.campus-item[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.campus-item[aria-pressed="true"] .ash { color: var(--accent-ink); }
+.campus-floors { display: flex; gap: 6px; flex-wrap: wrap; }
+.campus-floors button {
+  min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+}
+.campus-floors button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.campus-plan { background: color-mix(in srgb, var(--surface) 85%, transparent); border: 1px solid var(--hairline); border-radius: 10px; padding: 12px; }
+.campus-plan svg { width: 100%; height: auto; display: block; }
+.campus-plan figcaption { margin-top: 8px; }
+.plan-wing { fill: none; stroke: var(--ink-soft); stroke-width: 0.12; }
+.plan-room { fill: color-mix(in srgb, var(--ink) 16%, transparent); cursor: pointer; transition: fill 0.3s; }
+.plan-room:hover { fill: color-mix(in srgb, var(--ink) 30%, transparent); }
+.plan-outdoor { fill: color-mix(in srgb, var(--ink) 6%, transparent); stroke: var(--hairline); stroke-width: 0.08; }
+.plan-room.is-on { fill: var(--accent); }
+.campus-list { background: color-mix(in srgb, var(--surface) 85%, transparent); border: 1px solid var(--hairline); border-radius: 10px; padding: 10px 12px; }
+.campus-list summary { cursor: pointer; padding: 4px 0; }
+.campus-list-body { max-height: 34vh; overflow: auto; }
+.campus-list-floor { margin: 10px 0 4px; }
+
+/* fiche de la salle (Framer Motion) */
+.campus-card {
+  position: absolute; right: var(--gutter); bottom: 8vh; z-index: 6;
+  width: min(360px, 86vw);
+  padding: 24px 24px 20px;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--hairline); border-radius: 12px;
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.5);
+}
+.campus-card .mono { display: flex; align-items: center; gap: 6px; }
+.campus-card h3 { font-size: 28px; letter-spacing: -0.03em; line-height: 1.05; margin: 12px 0 10px; padding-right: 28px; }
+.campus-card > p:not(.mono) { color: var(--ink-soft); line-height: 1.5; }
+.campus-card-nav { display: flex; gap: 8px; margin-top: 18px; }
+.campus-card-nav .pill { padding: 8px 14px; }
+.campus-close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; }
+.campus-close:hover { background: var(--hairline); }
+
+/* mobile : boutons ronds en bas, fiche en bas d'écran */
+.campus-mobile {
+  position: absolute; left: 50%; bottom: 3vh; z-index: 5; transform: translateX(-50%);
+  display: flex; gap: 10px;
+  opacity: 0; pointer-events: none; transition: opacity 0.5s;
+}
+.s-campus.is-explore .campus-mobile { opacity: 1; pointer-events: auto; }
+.campus-mobile button {
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--surface); border: 1px solid var(--hairline);
+}
+
+@media (max-width: 767px) {
+  .s-campus .pin::after { display: none; }
+  .campus-head { top: 9vh; }
+  .s-campus.is-explore .campus-head h2 { display: none; }
+  .campus-panel { left: var(--gutter); right: var(--gutter); width: auto; top: calc(9vh + 56px); bottom: auto; gap: 8px; }
+  .campus-plan { display: none; }
+  .campus-list-body { max-height: 28vh; }
+  .campus-card {
+    left: 0; right: 0; bottom: 0; width: auto;
+    border-radius: 16px 16px 0 0; border-bottom: 0;
+    padding: 22px var(--gutter) calc(18px + env(safe-area-inset-bottom));
+  }
+  .campus-card h3 { font-size: 24px; }
+}
+
+/* ═══ Vue statique (mouvement réduit ou pas de WebGL) ═══ */
+.campus-still { display: none; }
+.s-campus.is-static { height: auto; }
+.s-campus.is-static .pin { position: relative; height: auto; overflow: visible; padding: 14vh var(--gutter) 10vh; display: grid; gap: 28px; }
+.s-campus.is-static .campus-host { display: none; }
+.s-campus.is-static .campus-head { position: static; max-width: none; order: -1; }
+.s-campus.is-static .campus-still { display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--hairline); }
+.s-campus.is-static .campus-still img { width: 100%; height: auto; display: block; }
+.s-campus.is-static .campus-panel { position: static; width: auto; max-width: 560px; opacity: 1; transform: none; pointer-events: auto; }
+.s-campus.is-static .campus-plan { display: block; }
+.s-campus.is-static .campus-list-body { max-height: none; }
+.s-campus.is-static .campus-card { position: relative; right: auto; bottom: auto; left: auto; width: auto; max-width: 560px; border-radius: 12px; border-bottom: 1px solid var(--hairline); }
+body.static .s-campus .pin { padding: 14vh var(--gutter) 10vh; }
+@media (min-width: 1000px) {
+  .s-campus.is-static .pin { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; }
+  .s-campus.is-static .campus-head { grid-column: 1 / -1; }
+}

@@ -169,7 +169,8 @@
     "motto": "The motto",
     "advice": "Advice",
     "voice": "Testimony",
-    "contact": "Contact"
+    "contact": "Contact",
+    "campus": "The campus"
   },
   "orbit": {
     "kicker": "THE HEI TRIBE · AMBODIVOANJO, IVANDRY",
@@ -207,6 +208,39 @@
       "quote": "I waited to feel ready before coding.",
       "title": "Code a little every day.",
       "text": "A Mimo exercise, an HTML page, a small project: consistency beats intensity."
+    }
+  },
+  "campus": {
+    "kicker": "THE CAMPUS · 3D TOUR",
+    "titleA": "The campus,",
+    "titleIt": "floor by floor.",
+    "steps": {
+      "0": "Bird's-eye view",
+      "1": "Half-turn above the courtyard",
+      "2": "The entrance, from the courtyard",
+      "3": "Lifting the roof",
+      "4": "Your turn: tap a room"
+    },
+    "stillAlt": "3D model of the HEI campus: a white L-shaped building around a courtyard, floors pulled apart, rooms in blue and a roof terrace under a canopy",
+    "searchLabel": "Search for a room",
+    "searchPlaceholder": "Search for a room…",
+    "results": "{n, plural, =0 {No rooms} one {# room found} other {# rooms found}}",
+    "noResult": "No room matches.",
+    "floorsLabel": "Choose a floor",
+    "allFloors": "All",
+    "planOf": "Plan",
+    "allRooms": "All rooms",
+    "rotateLeft": "Rotate the model",
+    "prev": "Previous",
+    "next": "Next",
+    "close": "Close the card",
+    "kinds": {
+      "class": "Classroom",
+      "lab": "Computer lab",
+      "admin": "Administration",
+      "service": "Facility",
+      "outdoor": "Outdoors",
+      "circulation": "Circulation"
     }
   }
 }
