@@ -80,3 +80,41 @@ une ambiguïté. Format : décision · pourquoi.
 21. **Mode statique** (mouvement réduit, ou WebGL absent) : image du verre
     (rendue par le moteur lui-même, `public/glass/hei-glass.webp`) et les 4
     chapitres empilés, tout visible. Décidé au chargement, comme le skill.
+
+## Phase 3 — Scènes de scroll
+
+22. **Épinglage en `position: sticky`, progression par ScrollTrigger.** Le skill
+    émule l'épinglage en translatant le pin dans un wrapper lissé maison. Ici
+    Lenis lisse le défilement, chaque scène fait N écrans de haut (`--pin`,
+    mêmes N que le skill : 5 / 3.5 / 4 / 9 / 3 / 2.6) et ScrollTrigger donne
+    la progression 0..1. Les courbes `seg`, `easeOut`, `easeInOut`, `makeGrow`,
+    `makeDraw` et toutes les fenêtres de temps sont celles de `app.js`.
+23. **Ordre de la page** : le verre (accueil + Découvrir HEI) → le nuage
+    (« Avant le premier cours, il y a la Tribu ») → Se repérer (rideau de lames,
+    4 étapes) → [Outils, phase 4] → devise → manifeste + objections → [Chiffres,
+    phase 4] → témoignage → footer. Le nuage sert de passage de l'école (le
+    verre) aux gens (la Tribu).
+24. **Nuage : dérive ralentie.** Avec la dérive du skill (linéaire, `vh * 1.15`),
+    plus aucune photo n'était à l'écran quand l'image naît entre les mots, or
+    c'est le repère de fidélité de la checklist. Même fenêtre (0.06 → 0.46),
+    mais dérive en t² et `vh * 0.4` : 5 photos restent à l'écran à p = 0.27 en
+    desktop, 4 en mobile ; le nuage a disparu à p = 0.7.
+25. **Zoom du nuage assombri à -42 %** (skill : -16 %) : les photos HEI (foules
+    en plein jour) sont plus chargées que les visuels du template ; le
+    positionnement blanc doit se lire.
+26. **Processus à 4 étapes** (skill : 3) : le prompt demande « une étape par jour
+    clé » (avant le jour 1, jour 1, LEI, ensuite). L'odomètre gère N étapes.
+27. **Devise = « Penser, Travailler, Impacter »**, la signature de HEI visible sur
+    ses visuels officiels (infographie alumni).
+28. **Ovales en or** (`--accent-text`) : c'est l'élément « regarde ici » de
+    chaque écran (règle color-and-brand-discipline).
+29. **Footer dans le layout** (commun à toutes les pages) ; nom géant ramené à
+    13vw sur mobile (« Meet da Tribu » est plus long que le nom du template).
+30. **Visuels** : 100 % HEI. Les collages du site ont été découpés en photos
+    individuelles et chaque visuel recadré au ratio exact de son emplacement
+    (`tools/crop_scenes.py`). Aucune banque d'images, aucune image générée.
+31. **Traînée d'images** : desktop uniquement (`hover: hover` et
+    `pointer: fine`), désactivée en mouvement réduit.
+32. **Accessibilité des textes découpés** : le manifeste et la devise sont
+    découpés en lettres pour l'animation ; une version entière est donnée aux
+    lecteurs d'écran (`sr-only` / `aria-label`).

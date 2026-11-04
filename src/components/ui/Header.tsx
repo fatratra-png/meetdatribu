@@ -17,7 +17,7 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Le loader (phase 3) prendra le relais de ce signal.
+    // Sans loader (déjà parti), le header entre tout de suite.
     if (!document.querySelector("[data-loader]")) {
       requestAnimationFrame(() => document.body.classList.add("is-ready"));
     }
@@ -29,12 +29,12 @@ export default function Header() {
         Meet da Tribu
       </Link>
       <nav aria-label={t("a11y.mainNav")} className="dock-nav">
-        <Link href={{ pathname: "/", hash: "decouvrir" }} className="dock-link">
+        <Link href={{ pathname: "/", hash: "decouvrir" }} className="dock-link mono">
           {t("nav.discover")}
         </Link>
         <Link
           href="/tribu"
-          className="dock-link"
+          className="dock-link mono"
           aria-current={pathname === "/tribu" ? "page" : undefined}
         >
           {t("nav.tribu")}
@@ -46,7 +46,7 @@ export default function Header() {
       </div>
       <Link
         href="/astuces"
-        className="dock-cta"
+        className="dock-cta mono"
         aria-current={pathname === "/astuces" ? "page" : undefined}
       >
         {t("nav.cta")}

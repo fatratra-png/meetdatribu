@@ -26,8 +26,7 @@
   },
   "home": {
     "kicker": "LEI 2026 · THE HEI SURVIVAL GUIDE",
-    "title": "Welcome to the Tribe",
-    "lead": "Phase 2: the glass is in place. The rest arrives scene by scene."
+    "title": "Welcome to the Tribe"
   },
   "astuces": {
     "kicker": "ALL THE TIPS",
@@ -80,5 +79,84 @@
       "l2": "by building.",
       "desc": "Every theoretical concept comes with a hands-on project. After three years in the LMD system: a Bachelor's degree in Computer Science recognised by MESupRES."
     }
+  },
+  "cloud": {
+    "kicker": "THE HEI TRIBE · AMBODIVOANJO, IVANDRY",
+    "line1": "Before your first class,",
+    "line2a": "there is",
+    "line2b": "the Tribe.",
+    "positioning": "Over 350 students, one family.",
+    "imageAlt": "Hundreds of HEI students dancing together in the courtyard during the 2024 welcome week"
+  },
+  "reperes": {
+    "w1": "Your",
+    "w2": "start,",
+    "w3": "4 markers.",
+    "imageAlt": "The HEI building in Ivandry, with its courtyard and white walkways",
+    "s1": {
+      "meta": "BEFORE DAY 1 · THE CAMPUS",
+      "title": "Find the campus before day one.",
+      "desc": "II J 161 R, Ambodivoanjo, Ivandry. The front desk is open Monday to Friday, 8am-12pm and 1pm-4pm."
+    },
+    "s2": {
+      "meta": "DAY 1 · THE WELCOME",
+      "title": "On day one, it all starts at the front desk.",
+      "desc": "Arrive early, introduce yourself, save your classmates' contacts. Now is the time for the \"silly\" questions."
+    },
+    "s3": {
+      "meta": "WEEKS 1 AND 2 · THE LEI",
+      "title": "The LEI sets your foundations in two weeks.",
+      "desc": "L'École d'Informatique, mandatory for every first-year: the tools, HTML/CSS, and your class. The final project: your own survival guide."
+    },
+    "s4": {
+      "meta": "AFTER THAT · GETTING ORGANISED",
+      "title": "The intranet runs your days.",
+      "desc": "Classes, rooms, announcements: everything goes through the intranet and Google Workspace. Make checking it a morning habit."
+    },
+    "cta": "All the tips →"
+  },
+  "motto": {
+    "kicker": "HEI'S MOTTO",
+    "w1": {
+      "word": "Think",
+      "hint": "UNDERSTAND THE PROBLEM BEFORE WRITING A LINE"
+    },
+    "w2": {
+      "word": "Work",
+      "hint": "PRACTISE EVERY DAY, IN PROJECTS AND IN TEAMS"
+    },
+    "w3": {
+      "word": "Impact",
+      "hint": "CHANGE THINGS, IN MADAGASCAR AND BEYOND"
+    }
+  },
+  "manifesto": {
+    "kicker": "GOOD ADVICE · WHAT I WISH I HAD KNOWN",
+    "text": "Nobody is waiting for you to fail. Ask early, pair up, and [[ask for help]] before you get lost. That's what the Tribe is for."
+  },
+  "objections": {
+    "label": "What the Tribe promises you",
+    "no1": "No stupid questions.",
+    "no2": "No shame in being stuck.",
+    "no3": "No forced solo work.",
+    "finale": "Just you, with",
+    "pill": "the Tribe."
+  },
+  "testimonial": {
+    "label": "A graduate's testimony",
+    "quote": "I landed my first job during my internship. In interviews, I had code to show: all my HEI projects.",
+    "author": "[First name L.], Mpamakilay class",
+    "context": "OF THE CLASS IN A JOB, 10 MONTHS AFTER GRADUATION",
+    "prefix": "",
+    "figure": "41.9",
+    "unit": "%"
+  },
+  "footer": {
+    "kicker": "A QUESTION BEFORE YOU START?",
+    "hours": "MON-FRI 8AM-12PM / 1PM-4PM",
+    "credit": "Made by {name}, LEI 2026 teaching assistant",
+    "socialLabel": "HEI on social media",
+    "newTab": "(new tab)",
+    "rights": "Photos and logo © HEI"
   }
 }

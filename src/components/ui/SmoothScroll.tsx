@@ -24,6 +24,9 @@ export default function SmoothScroll() {
       setProgress(max > 0 ? window.scrollY / max : 0);
     };
 
+    // Mode statique des scènes (règle du skill : UNIQUEMENT sur mouvement réduit)
+    document.body.classList.toggle("static", reduced);
+
     if (reduced) {
       window.addEventListener("scroll", onNativeScroll, { passive: true });
       onNativeScroll();

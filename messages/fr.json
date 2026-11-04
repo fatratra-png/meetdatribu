@@ -26,8 +26,7 @@
   },
   "home": {
     "kicker": "LEI 2026 · LE GUIDE DE SURVIE À HEI",
-    "title": "Bienvenue dans la Tribu",
-    "lead": "Phase 2 : le verre est en place. La suite arrive scène par scène."
+    "title": "Bienvenue dans la Tribu"
   },
   "astuces": {
     "kicker": "TOUTES LES ASTUCES",
@@ -80,5 +79,84 @@
       "l2": "en construisant.",
       "desc": "Chaque notion théorique s'accompagne d'un projet pratique. Au bout de trois ans dans le système LMD : une Licence en Informatique reconnue par le MESupRES."
     }
+  },
+  "cloud": {
+    "kicker": "LA TRIBU HEI · AMBODIVOANJO, IVANDRY",
+    "line1": "Avant le premier cours,",
+    "line2a": "il y a",
+    "line2b": "la Tribu.",
+    "positioning": "Plus de 350 étudiants, une seule famille.",
+    "imageAlt": "Des centaines d'étudiants de HEI dansent ensemble dans la cour pendant l'intégration 2024"
+  },
+  "reperes": {
+    "w1": "Ta",
+    "w2": "rentrée,",
+    "w3": "4 repères.",
+    "imageAlt": "Le bâtiment de HEI à Ivandry, avec sa cour et ses coursives blanches",
+    "s1": {
+      "meta": "AVANT LE JOUR 1 · LE CAMPUS",
+      "title": "Repère le campus avant la rentrée.",
+      "desc": "II J 161 R, Ambodivoanjo, Ivandry. L'accueil est ouvert du lundi au vendredi, de 8 h à 12 h et de 13 h à 16 h."
+    },
+    "s2": {
+      "meta": "JOUR 1 · L'ACCUEIL",
+      "title": "Le jour 1, tout se joue à l'accueil.",
+      "desc": "Arrive en avance, présente-toi, note les contacts de ta promo. Les questions « bêtes », c'est maintenant qu'elles se posent."
+    },
+    "s3": {
+      "meta": "SEMAINES 1 ET 2 · LE LEI",
+      "title": "Le LEI pose tes bases en deux semaines.",
+      "desc": "L'École d'Informatique, obligatoire pour tous les L1 : les outils, le HTML/CSS, et ta promo. À la clé, ton propre guide de survie."
+    },
+    "s4": {
+      "meta": "ENSUITE · L'ORGANISATION",
+      "title": "L'intranet rythme tes journées.",
+      "desc": "Cours, salles, annonces : tout passe par l'intranet et Google Workspace. Prends le réflexe d'y jeter un œil chaque matin."
+    },
+    "cta": "Toutes les astuces →"
+  },
+  "motto": {
+    "kicker": "LA DEVISE DE HEI",
+    "w1": {
+      "word": "Penser",
+      "hint": "COMPRENDRE LE PROBLÈME AVANT D'ÉCRIRE UNE LIGNE"
+    },
+    "w2": {
+      "word": "Travailler",
+      "hint": "PRATIQUER CHAQUE JOUR, EN PROJET ET EN ÉQUIPE"
+    },
+    "w3": {
+      "word": "Impacter",
+      "hint": "CHANGER LES CHOSES, À MADAGASCAR ET AU-DELÀ"
+    }
+  },
+  "manifesto": {
+    "kicker": "LES BONS CONSEILS · CE QUE J'AURAIS AIMÉ SAVOIR",
+    "text": "Personne ne t'attend au tournant. Pose tes questions tôt, travaille en binôme, et [[demande de l'aide]] avant d'être perdu. La Tribu est là pour ça."
+  },
+  "objections": {
+    "label": "Ce que la Tribu te promet",
+    "no1": "Pas de question bête.",
+    "no2": "Pas de honte à bloquer.",
+    "no3": "Pas de solo forcé.",
+    "finale": "Juste toi, avec",
+    "pill": "la Tribu."
+  },
+  "testimonial": {
+    "label": "Témoignage d'un ancien",
+    "quote": "Mon premier poste, je l'ai décroché pendant mon stage. En entretien, j'avais du code à montrer : tous mes projets de HEI.",
+    "author": "[Prénom N.], promo Mpamakilay",
+    "context": "DE LA PROMO EN ENTREPRISE, 10 MOIS APRÈS LA SOUTENANCE",
+    "prefix": "",
+    "figure": "41.9",
+    "unit": "%"
+  },
+  "footer": {
+    "kicker": "UNE QUESTION AVANT LA RENTRÉE ?",
+    "hours": "LUN-VEN 8H-12H / 13H-16H",
+    "credit": "Fait par {name}, assistant pédagogique LEI 2026",
+    "socialLabel": "HEI sur les réseaux",
+    "newTab": "(nouvel onglet)",
+    "rights": "Photos et logo © HEI"
   }
 }

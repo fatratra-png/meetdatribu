@@ -8,6 +8,8 @@ import Header from "@/components/ui/Header";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import MotionProvider from "@/components/ui/MotionProvider";
 import ThemeScript from "@/components/ui/ThemeScript";
+import Loader from "@/components/scenes/Loader";
+import FooterGiant from "@/components/scenes/FooterGiant";
 import "../globals.css";
 
 export const SITE_URL = "https://meetdatribu.vercel.app";
@@ -67,9 +69,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             <a href="#contenu" className="skip-link">
               {t("skip")}
             </a>
+            <Loader name="Meet da Tribu" />
             <SmoothScroll />
             <Header />
             <main id="contenu">{children}</main>
+            <FooterGiant />
           </MotionProvider>
         </NextIntlClientProvider>
       </body>

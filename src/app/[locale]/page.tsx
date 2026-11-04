@@ -1,22 +1,39 @@
 import { use } from "react";
-import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import GlassStage from "@/components/three/GlassStage";
+import HeroCloud from "@/components/scenes/HeroCloud";
+import BladeCurtain from "@/components/scenes/BladeCurtain";
+import MottoBand from "@/components/scenes/MottoBand";
+import Manifesto from "@/components/scenes/Manifesto";
+import Objections from "@/components/scenes/Objections";
+import Testimonial from "@/components/scenes/Testimonial";
 
-// Page d'accueil — phase 2 : la scène du verre (accueil + Découvrir HEI).
-// Les scènes de scroll (phase 3) et le contenu (phase 4) viendront à la suite.
+/**
+ * Page d'accueil : l'expérience principale, scrubée au scroll.
+ * Ordre (pyramid-storyline-builder) :
+ *   1. Accueil + Découvrir HEI — le verre (le symbole HEI, ses 4 piliers)
+ *   2. La Tribu — le nuage de photos (on passe de l'école aux gens)
+ *   3. Se repérer — le rideau de lames, une étape par moment clé
+ *   4. Les outils — cartes interactives (phase 4)
+ *   5. La devise — Penser, Travailler, Impacter
+ *   6. Les bons conseils — manifeste, puis objections (« Pas de… »)
+ *   7. La Tribu en chiffres (phase 4)
+ *   8. Témoignage
+ * Le footer est dans le layout (commun à toutes les pages).
+ */
 export default function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = use(params);
   setRequestLocale(locale);
-  const t = useTranslations("home");
 
   return (
     <>
       <GlassStage />
-      <section className="site-grid min-h-svh content-center">
-        <p className="mono col-span-4 text-ink-soft md:col-span-12">{t("kicker")}</p>
-        <p className="col-span-4 mt-6 max-w-[42ch] text-ink-soft md:col-span-6">{t("lead")}</p>
-      </section>
+      <HeroCloud />
+      <BladeCurtain />
+      <MottoBand />
+      <Manifesto />
+      <Objections />
+      <Testimonial />
     </>
   );
 }
