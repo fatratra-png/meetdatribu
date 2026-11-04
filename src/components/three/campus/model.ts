@@ -81,10 +81,10 @@ export function buildCampus() {
   if (parking) {
     const [px, pz, pw, pd] = parking.rect;
     root.add(onRect(parking.rect, 0, 0.05, 0.03, mat("#8a8d93", shared, { roughness: 0.95 })));
-    // marquage au sol : une ligne blanche par rangée
+    // marquage au sol : une ligne blanche au bord de chaque colonne, côté allée
     const line = mat("#f4f1ea", shared);
-    for (const z of [pz + 0.3, pz + pd - 0.3]) root.add(onRect([px + 0.2, z - 0.04, pw - 0.4, 0.08], 0.05, 0.02, 0.01, line));
-    root.add(parkBikes(createBikeFactory(shared), parking.rect, [3.4, 4.6]));
+    for (const x of [px + 2.0, px + pw - 2.0]) root.add(onRect([x - 0.04, pz + 0.2, 0.08, pd - 0.4], 0.05, 0.02, 0.01, line));
+    root.add(parkBikes(createBikeFactory(shared), parking.rect));
   }
   // l'allée vers la porte de Villa Joell, en or : elle dit « c'est par ici »
   const pathMesh = onRect([3.4, 7, 1.2, ENCLOSURE.z1 - 7], 0.03, 0.08, 0.03, mat(GOLD, shared, { roughness: 0.6 }));
@@ -196,7 +196,7 @@ export function buildCampus() {
         anchor.position.set(22, 1.4, 4);
       } else if (r.kind === "outdoor") {
         // le parking : pas de volume propre, le repère flotte au-dessus des motos
-        anchor.position.set(x + w / 2 + 2.2, 1.7, z + d / 2);
+        anchor.position.set(x + w / 2, 1.7, z + d / 2);
       } else if (r.kind === "circulation") {
         // la véranda : son volume est la dalle et le garde-corps
         anchor.position.set(x + w / 2, 1.4, z + d / 2);

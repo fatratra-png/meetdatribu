@@ -16,7 +16,8 @@
  *         séparées par une baie vitrée et reliées par une véranda. PI et
  *         Sigma s'étalent de Villa Joell jusqu'aux toilettes et forment un L
  *         avec NP (au-dessus de la salle B).
- *   Devant : pas de cour, un parking à motos de la taille de Villa Joell.
+ *   Devant : pas de cour, un parking à motos de la taille de Villa Joell,
+ *         centré le long de la salle B, à 2 m d'elle (la galerie).
  *   Toit : le fameux Rooftop, c'est TOUT le toit, au-dessus de PI, Sigma et NP.
  * Recoupé avec la photo du campus publiée par HEI (public/hei/) : véranda en
  * L à garde-corps noirs, galerie à poteaux sous l'aile de droite, toile tendue
@@ -145,10 +146,10 @@ export const ROOMS: Room[] = [
     kind: "outdoor",
     name: { fr: "Parking motos", en: "Motorbike parking" },
     desc: {
-      fr: "Pas de cour à HEI : devant Villa Joell, juste derrière le portail, c'est le parking des deux-roues. Scooters, motos de compétition, roadsters : gare-toi droit et laisse l'allée libre.",
-      en: "There's no courtyard at HEI: in front of Villa Joell, just past the gate, is the two-wheeler parking. Scooters, racing bikes, roadsters: park straight and keep the aisle clear.",
+      fr: "Pas de cour à HEI : le parking des deux-roues longe la salle B, à deux mètres d'elle. Scooters, motos de compétition, roadsters : gare-toi droit, nez vers l'extérieur, et laisse l'allée du milieu libre.",
+      en: "There's no courtyard at HEI: the two-wheeler parking runs alongside Room B, two metres from it. Scooters, racing bikes, roadsters: park straight, nose facing out, and keep the middle aisle clear.",
     },
-    rect: [0, 9, 9, 7], // mêmes dimensions que Villa Joell (PLACEHOLDER comme elle)
+    rect: [13, 9, 9, 7], // mêmes dimensions que Villa Joell, centré sur la façade de B (x = 24), 2 m d'écart
   },
 
   // ─── 1er étage ───

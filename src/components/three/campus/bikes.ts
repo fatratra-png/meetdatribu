@@ -103,26 +103,26 @@ export function createBikeFactory(materials: THREE.MeshStandardMaterial[]) {
   };
 }
 
-/** Le parking : 14 motos en deux rangées, de part et d'autre de l'allée dorée. */
-export function parkBikes(
-  bike: ReturnType<typeof createBikeFactory>,
-  [px, pz, pw, pd]: [number, number, number, number],
-  aisle: [number, number],
-) {
+/**
+ * Le parking : 14 motos en deux colonnes le long de z, allée au milieu.
+ * Celles de gauche ont le nez tourné vers la gauche (ouest), celles de
+ * droite vers la droite (est).
+ */
+export function parkBikes(bike: ReturnType<typeof createBikeFactory>, [px, pz, pw, pd]: [number, number, number, number]) {
   const out = new THREE.Group();
   out.name = "parking-motos";
   const kinds: BikeKind[] = ["scooter", "sport", "roadster", "scooter", "scooter", "sport", "roadster"];
   const colors = ["#c8102e", "#1d3f94", "#1b1d22", "#f4f1ea", "#dfa408", "#2a52c4", "#0b6e4f", "#8891a0"];
-  // emplacements le long de x, en évitant l'allée qui mène à Villa Joell
-  const xs: number[] = [];
-  for (let x = px + 0.6; x < px + pw - 0.4; x += 0.92) if (x < aisle[0] - 0.3 || x > aisle[1] + 0.3) xs.push(x);
+  const zs: number[] = [];
+  for (let z = pz + 0.6; z < pz + pd - 0.4; z += 0.92) zs.push(z);
   let n = 0;
-  for (const [row, z, yaw] of [[0, pz + 1.5, 0], [1, pz + pd - 1.5, Math.PI]] as const) {
-    xs.forEach((x, i) => {
-      const seed = ((i + 1) * 9301 + (row + 1) * 49297) % 233280 / 233280; // pseudo-aléatoire stable
-      const b = bike(kinds[(i + row * 3) % kinds.length], colors[n++ % colors.length]);
+  // rotation.y : +π/2 envoie le nez (−z local) vers −x (gauche), −π/2 vers +x (droite)
+  for (const [col, x, yaw] of [[0, px + 1.0, Math.PI / 2], [1, px + pw - 1.0, -Math.PI / 2]] as const) {
+    zs.forEach((z, i) => {
+      const seed = (((i + 1) * 9301 + (col + 1) * 49297) % 233280) / 233280; // pseudo-aléatoire stable
+      const b = bike(kinds[(i + col * 3) % kinds.length], colors[n++ % colors.length]);
       b.position.set(x, 0.06, z);
-      b.rotation.y = yaw + (seed - 0.5) * 0.3;
+      b.rotation.y = yaw + (seed - 0.5) * 0.2;
       out.add(b);
     });
   }
