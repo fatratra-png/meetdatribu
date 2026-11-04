@@ -7,6 +7,13 @@
 .tools-head { max-width: 900px; margin-bottom: 7vh; }
 .tools-head h2 { font-size: clamp(36px, 4.8vw, 76px); line-height: 1; letter-spacing: -0.045em; margin-top: 16px; }
 .tools-lead { margin-top: 18px; color: var(--ink-soft); max-width: 48ch; }
+.tools-hint {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+  padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--accent); color: var(--accent-text);
+}
+.tools-hint svg { animation: hint-spin 3.2s var(--ease-inout) infinite; }
+@keyframes hint-spin { 0%, 60% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
 
 /* bento : grande / haute / haute / grande, en diagonale (3 col. × 4 rangées) */
 .bento {

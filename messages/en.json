@@ -272,7 +272,7 @@
     "kicker": "THE TOOLS TO KNOW",
     "titleA": "Four tools are enough for",
     "titleIt": "your first week.",
-    "lead": "What you'll open every day at HEI. Flip a card to read the older students' tip.",
+    "lead": "What you'll open every day at HEI.",
     "tipLabel": "THE TIP",
     "showTip": "The tip",
     "back": "Back",
@@ -299,7 +299,8 @@
       "what": "Timetable, rooms, announcements, grades: everything about your studies.",
       "tags": "ADMIN.HEI.SCHOOL",
       "tip": "A quick look every morning before you leave: that's where you learn a class has moved."
-    }
+    },
+    "hint": "Flip the cards to discover the tips"
   },
   "figures": {
     "kicker": "THE TRIBE IN NUMBERS",

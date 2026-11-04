@@ -272,7 +272,7 @@
     "kicker": "LES OUTILS À CONNAÎTRE",
     "titleA": "Quatre outils suffisent pour",
     "titleIt": "ta première semaine.",
-    "lead": "Ce que tu ouvriras tous les jours à HEI. Retourne une carte pour lire l'astuce des anciens.",
+    "lead": "Ce que tu ouvriras tous les jours à HEI.",
     "tipLabel": "L'ASTUCE",
     "showTip": "L'astuce",
     "back": "Retour",
@@ -299,7 +299,8 @@
       "what": "Emploi du temps, salles, annonces, notes : tout ce qui concerne ta scolarité.",
       "tags": "ADMIN.HEI.SCHOOL",
       "tip": "Un coup d'œil chaque matin avant de partir : c'est là qu'on apprend qu'un cours change de salle."
-    }
+    },
+    "hint": "Retourne les cartes pour découvrir les tips"
   },
   "figures": {
     "kicker": "LA TRIBU EN CHIFFRES",

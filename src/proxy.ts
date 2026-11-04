@@ -7,5 +7,5 @@ export default createMiddleware(routing);
 
 export const config = {
   // Tout sauf les fichiers internes de Next, l'API et les fichiers statiques.
-  matcher: "/((?!api|_next|_vercel|.*\\..*).*)",
+  matcher: "/((?!api|_next|_vercel|sitemap.xml|robots.txt|.*\\..*).*)",
 };

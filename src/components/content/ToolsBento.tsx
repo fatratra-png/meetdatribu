@@ -38,6 +38,11 @@ export default function ToolsBento() {
         <p className="tools-lead reveal" style={{ "--i": 2 } as React.CSSProperties}>
           {t("lead")}
         </p>
+        {/* l'indication : les cartes se retournent */}
+        <p className="tools-hint mono reveal" style={{ "--i": 3 } as React.CSSProperties}>
+          <RotateCw size={14} strokeWidth={1.75} aria-hidden="true" />
+          {t("hint")}
+        </p>
       </header>
 
       <ul className="bento">
