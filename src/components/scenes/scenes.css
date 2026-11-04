@@ -183,7 +183,7 @@
 .s-quote .pin { background: var(--bg); display: flex; align-items: center; justify-content: center; }
 .qt { width: min(1100px, 86vw); }
 .qt-text { font-size: clamp(30px, 4.4vw, 72px); line-height: 1.06; letter-spacing: -0.02em; margin-top: 22px; }
-.qt-text .w { display: inline-block; opacity: 0.12; filter: blur(8px); will-change: opacity, filter; }
+.qt-text .w { display: inline-block; opacity: 0; filter: blur(8px); will-change: opacity, filter; }
 .qt-sign { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--hairline); opacity: 0; transform: translateY(16px); }
 .qt-name { font-weight: 500; }
 .qt-ctx { color: var(--ink-soft); margin-top: 4px; }

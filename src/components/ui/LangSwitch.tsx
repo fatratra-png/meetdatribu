@@ -42,7 +42,7 @@ export default function LangSwitch() {
             lang={l}
             onClick={() => change(l)}
             aria-pressed={active}
-            aria-label={t(l)}
+            aria-label={`${l.toUpperCase()}, ${t(l)}`}
             className="mono relative z-10 h-9 w-9 rounded-[var(--radius)] transition-colors duration-300"
             style={{ color: active ? "var(--bg)" : "var(--ink)" }}
           >

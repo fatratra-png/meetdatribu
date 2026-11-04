@@ -9,6 +9,8 @@ type Props = {
   onFrame?: (scroll: number) => void;
   /** Appelé si WebGL est indisponible ou si le moteur échoue : on bascule sur l'image. */
   onFail?: () => void;
+  /** Appelé quand la première image 3D est dessinée (l'affiche peut s'effacer). */
+  onReady?: () => void;
 };
 
 declare global {
@@ -25,13 +27,15 @@ declare global {
  * - se met en pause quand il sort de l'écran (IntersectionObserver) ;
  * - suit la taille de son conteneur (ResizeObserver).
  */
-export default function GlassCanvas({ onFrame, onFail }: Props) {
+export default function GlassCanvas({ onFrame, onFail, onReady }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const onFrameRef = useRef(onFrame);
   const onFailRef = useRef(onFail);
+  const onReadyRef = useRef(onReady);
   useEffect(() => {
     onFrameRef.current = onFrame;
     onFailRef.current = onFail;
+    onReadyRef.current = onReady;
   });
 
   useEffect(() => {
@@ -68,6 +72,8 @@ export default function GlassCanvas({ onFrame, onFail }: Props) {
           },
         };
         host.dataset.ready = "true";
+        // la 3D a dessiné : l'affiche peut s'effacer à l'image suivante
+        requestAnimationFrame(() => requestAnimationFrame(() => onReadyRef.current?.()));
       } catch {
         // WebGL indisponible ou contexte refusé : image de secours, sans bruit en console
         onFailRef.current?.();

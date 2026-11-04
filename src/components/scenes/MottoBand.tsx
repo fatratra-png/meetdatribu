@@ -83,7 +83,8 @@ export default function MottoBand() {
           </h2>
           <p className="motto-track">
             {KEYS.map((k) => (
-              <span key={k} className="mw" aria-label={t(`${k}.word`)}>
+              <span key={k} className="mw">
+                <span className="sr-only">{t(`${k}.word`)}</span>
                 {[...t(`${k}.word`)].map((c, i) => (
                   <span key={i} className="sc" aria-hidden="true">
                     {c}

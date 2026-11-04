@@ -153,10 +153,19 @@ export function useScene(
     });
     scene.measure?.();
     scene.update(st.progress);
-    // les longueurs des tracés et les mesures dépendent des polices
-    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    // les longueurs des tracés et les mesures dépendent des polices :
+    // UN seul recalcul global, quel que soit le nombre de scènes
+    scheduleFontRefresh();
     return () => st.kill();
   }, [ref]);
+}
+
+let fontRefresh: Promise<void> | null = null;
+function scheduleFontRefresh() {
+  if (fontRefresh || !document.fonts) return;
+  fontRefresh = document.fonts.ready.then(() => {
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+  });
 }
 
 /** Révélation à l'entrée dans l'écran (classe `in-view`, comme le skill). */

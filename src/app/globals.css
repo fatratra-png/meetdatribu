@@ -188,7 +188,8 @@ body.is-ready .topbar.is-hidden { transform: translateY(-101%); }
     --t-heading: clamp(27px, 6.6vw, 40px);
     --t-body: 17px;
   }
-  .topbar { gap: 8px; padding: 10px var(--gutter); }
+  /* mobile : pas de flou d'arrière-plan (coûteux à chaque image), fond presque opaque */
+  .topbar { gap: 8px; padding: 10px var(--gutter); backdrop-filter: none; background: color-mix(in srgb, var(--bg) 94%, transparent); }
   .topbar-nav { display: none; }
   .topbar-tools { margin-left: auto; }
   .topbar .pill { padding: 8px 12px; }

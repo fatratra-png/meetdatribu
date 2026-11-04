@@ -30,7 +30,7 @@ export default function Testimonial() {
         const span = 0.55 / ws.length;
         ws.forEach((w, i) => {
           const k = seg(p, 0.05 + i * span, 0.05 + i * span + 0.12, easeOut);
-          w.style.opacity = (0.12 + k * 0.88).toFixed(3);
+          w.style.opacity = k.toFixed(3); // de 0 (invisible) à 1 : pas de texte gris illisible
           w.style.filter = `blur(${((1 - k) * 8).toFixed(2)}px)`;
         });
         const s = seg(p, 0.62, 0.74, easeOut);

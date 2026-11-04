@@ -24,10 +24,22 @@
   overflow: hidden;
 }
 .glass-canvas { position: absolute; inset: 0; }
+/* affiche du verre avant le démarrage de la 3D : à droite (paysage), en bas (portrait) */
+.glass-poster {
+  position: absolute; inset: 0; display: grid; place-items: center end; padding-right: 4vw;
+  background: radial-gradient(60% 70% at 70% 45%, #0b2a7a 0%, #000510 70%);
+  transition: opacity 0.8s var(--ease-out); z-index: 1;
+}
+.glass-poster img { width: min(46vw, 640px); height: auto; mix-blend-mode: screen; }
+.glass-poster.is-hidden { opacity: 0; pointer-events: none; }
+@media (max-width: 900px), (max-aspect-ratio: 4/5) {
+  .glass-poster { place-items: end center; padding: 0 0 6vh; }
+  .glass-poster img { width: min(86vw, 460px); }
+}
 /* le canvas WebGL partagé (verre + campus) remplit son conteneur */
 .webgl-shared { position: absolute; inset: 0; width: 100%; height: 100%; display: block; outline: none; }
 
-.glass-slides { position: absolute; inset: 0; pointer-events: none; }
+.glass-slides { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .glass-slide { position: absolute; bottom: 12%; }
 .glass-slide.active { pointer-events: auto; }
 

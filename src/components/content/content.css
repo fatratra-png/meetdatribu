@@ -12,7 +12,7 @@
   padding: 8px 14px; border-radius: 999px;
   border: 1px solid var(--accent); color: var(--accent-text);
 }
-.tools-hint svg { animation: hint-spin 3.2s var(--ease-inout) infinite; }
+.tools-hint svg { animation: hint-spin 3.2s var(--ease-inout) 4; } /* quelques tours, pas à l'infini */
 @keyframes hint-spin { 0%, 60% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
 
 /* bento : grande / haute / haute / grande, en diagonale (3 col. × 4 rangées) */

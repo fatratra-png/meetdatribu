@@ -52,6 +52,10 @@ export default function GlassStage() {
   // le chapitre 1 est actif dès le rendu serveur (lisible même avant le JS)
   const state = useRef(SLIDE_WINDOWS.map((_, i) => ({ active: i === 0, since: 0, left: 0 })));
   const [mode, setMode] = useState<"pending" | "3d" | "static">("pending");
+  /** Le moteur 3D démarre à la première interaction : le premier affichage
+   *  reste léger (pas de Three.js), l'image du verre sert d'affiche. */
+  const [boot, setBoot] = useState(false);
+  const [ready, setReady] = useState(false);
 
   // Le mode se décide AU CHARGEMENT, comme dans le skill (pas de bascule au redimensionnement).
   useEffect(() => {
@@ -85,6 +89,15 @@ export default function GlassStage() {
     window.addEventListener("resize", fit);
     return () => window.removeEventListener("resize", fit);
   }, [mode]);
+
+  // première interaction (souris, toucher, molette, clavier, défilement) → 3D
+  useEffect(() => {
+    if (mode !== "3d" || boot) return;
+    const events = ["pointermove", "pointerdown", "touchstart", "wheel", "keydown", "scroll"] as const;
+    const go = () => setBoot(true);
+    events.forEach((e) => window.addEventListener(e, go, { once: true, passive: true }));
+    return () => events.forEach((e) => window.removeEventListener(e, go));
+  }, [mode, boot]);
 
   // ScrollTrigger → store : progression 0..1 sur toute la hauteur de la scène.
   useGSAP(
@@ -144,7 +157,17 @@ export default function GlassStage() {
       <span id="decouvrir" className="glass-anchor" aria-hidden="true" />
 
       <div className="glass-sticky">
-        {mode === "3d" && <GlassCanvas onFrame={onFrame} onFail={() => setMode("static")} />}
+        {mode === "3d" && (
+          <>
+            {/* affiche : le verre rendu par le moteur, le temps que la 3D démarre */}
+            <div className={`glass-poster${ready ? " is-hidden" : ""}`} aria-hidden="true">
+              <Image src="/glass/hei-glass.webp" alt="" width={1100} height={1075} sizes="50vw" priority />
+            </div>
+            {boot && (
+              <GlassCanvas onFrame={onFrame} onReady={() => setReady(true)} onFail={() => setMode("static")} />
+            )}
+          </>
+        )}
         {mode === "static" && (
           <div className="glass-fallback">
             <Image

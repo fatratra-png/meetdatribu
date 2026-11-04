@@ -38,8 +38,10 @@
 }
 .campus-dot::after {
   content: ""; position: absolute; inset: -6px; border-radius: 50%;
-  border: 1px solid var(--accent); animation: campus-pulse 2.2s var(--ease-out) infinite;
+  border: 1px solid var(--accent); opacity: 0;
 }
+/* la pulsation ne tourne qu'en visite, sur les points visibles */
+.s-campus.is-explore .campus-spot[data-visible="true"] .campus-dot::after { animation: campus-pulse 2.2s var(--ease-out) infinite; }
 @keyframes campus-pulse { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
 .campus-spot-label {
   position: absolute; left: 34px; top: 50%; margin-top: -13px;
