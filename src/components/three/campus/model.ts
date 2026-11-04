@@ -10,6 +10,7 @@
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import { createBikeFactory, createSuv, parkBikes } from "./bikes";
+import { createPeople, type Person } from "./people";
 import {
   FLOOR_HEIGHT,
   FLOORS,
@@ -70,6 +71,7 @@ export function buildCampus() {
   const shared: THREE.MeshStandardMaterial[] = [];
   const floors = new Map<FloorId, FloorNode>();
   const rooms = new Map<string, RoomNode>();
+  const people: Person[] = [];
 
   // ── socle, parking motos, allée d'entrée vers Villa Joell ──
   const base = box(38, 0.8, 22, 0.35, mat(BASE, shared));
@@ -229,6 +231,9 @@ export function buildCampus() {
       rooms.set(r.id, { id: r.id, floor: f.id, mesh, anchor, base: baseColor });
     }
 
+    // des étudiants sur le Rooftop : MacBook sous le bras, sandwich, danse
+    if (f.id === "toit") people.push(...createPeople(group, materials, 0.3));
+
     root.add(group);
     floors.set(f.id, { id: f.id, level: f.level, group, materials });
   }
@@ -251,5 +256,5 @@ export function buildCampus() {
   shadow.position.set(15.5, -0.82, 7.75);
   root.add(shadow);
 
-  return { root, floors, rooms, shadowTex };
+  return { root, floors, rooms, shadowTex, people };
 }

@@ -44,7 +44,7 @@ export default function Header() {
     <header className="topbar" ref={ref} onFocusCapture={() => ref.current?.classList.remove("is-hidden")}>
       <Link href="/" className="topbar-mark" aria-label={t("a11y.home")}>
         <HeiMark />
-        Meet da Tribu
+        <span className="topbar-name">Meet da Tribu</span>
       </Link>
       <nav aria-label={t("a11y.mainNav")} className="topbar-nav">
         <Link href={{ pathname: "/", hash: "decouvrir" }} className="topbar-link mono">

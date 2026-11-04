@@ -131,49 +131,83 @@ export function parkBikes(bike: ReturnType<typeof createBikeFactory>, [px, pz, p
 }
 
 /**
- * Le SUV garé au centre du parking (gabarit d'un Toyota Fortuner : environ
- * 4,8 × 1,85 × 1,8 m), stylisé comme le reste : caisse haute, vitres teintées,
- * gros pneus, barres de toit. Orienté le long de z, nez vers -z.
+ * Le SUV garé au centre du parking : gabarit d'un Toyota Fortuner (environ
+ * 4,8 × 1,85 × 1,8 m), grenat. La caisse est un profil latéral extrudé
+ * (capot, pare-brise incliné, toit plat, montant arrière), puis on ajoute les
+ * vitres, élargisseurs d'ailes, rétroviseurs, marchepieds, feux et barres de
+ * toit. Stylisé, sans logo. Orienté le long de z, nez vers -z.
  */
 export function createSuv(materials: THREE.MeshStandardMaterial[]) {
-  const mk = (color: string, roughness: number, metalness: number) => {
-    const m = new THREE.MeshStandardMaterial({ color, roughness, metalness });
+  const reg = <T extends THREE.MeshStandardMaterial>(m: T) => {
     m.userData.baseOpacity = 1;
     materials.push(m);
     return m;
   };
-  const paint = mk("#3a3f47", 0.3, 0.5);
-  const glass = mk("#141820", 0.15, 0.6);
-  const tyre = mk("#1b1d22", 0.9, 0);
-  const rim = mk("#c9ccd2", 0.3, 0.8);
-  const light = mk("#f4f1ea", 0.2, 0.1);
+  // peinture grenat vernie
+  const paint = reg(new THREE.MeshPhysicalMaterial({ color: "#6e1b28", roughness: 0.32, metalness: 0.45, clearcoat: 1, clearcoatRoughness: 0.08 }));
+  const glass = reg(new THREE.MeshStandardMaterial({ color: "#10141b", roughness: 0.08, metalness: 0.7 }));
+  const trim = reg(new THREE.MeshStandardMaterial({ color: "#23262c", roughness: 0.7, metalness: 0.1 }));
+  const chrome = reg(new THREE.MeshStandardMaterial({ color: "#d4d7dc", roughness: 0.22, metalness: 0.9 }));
+  const tyre = reg(new THREE.MeshStandardMaterial({ color: "#16181c", roughness: 0.92, metalness: 0 }));
+  const head = reg(new THREE.MeshStandardMaterial({ color: "#f4f1ea", roughness: 0.2, metalness: 0.1, emissive: "#f4f1ea", emissiveIntensity: 0.15 }));
+  const tail = reg(new THREE.MeshStandardMaterial({ color: "#b3121f", roughness: 0.3, metalness: 0.1, emissive: "#b3121f", emissiveIntensity: 0.2 }));
+
   const grp = new THREE.Group();
   grp.name = "suv-fortuner";
-  const add = (geo: THREE.BufferGeometry, m: THREE.Material, x: number, y: number, z: number) => {
+  const W = 1.85;
+  /** extrude un profil (u = longueur, avant à +u ; v = hauteur) sur la largeur w */
+  const profile = (pts: [number, number][], w: number, bevel = 0.05) => {
+    const shape = new THREE.Shape(pts.map(([u, v]) => new THREE.Vector2(u, v)));
+    const g = new THREE.ExtrudeGeometry(shape, { depth: w - bevel * 2, bevelEnabled: true, bevelSize: bevel, bevelThickness: bevel, bevelSegments: 3, curveSegments: 8 });
+    g.translate(0, 0, -(w - bevel * 2) / 2);
+    g.rotateY(Math.PI / 2); // u (avant) → -z ; extrusion → x
+    return g;
+  };
+  const add = (geo: THREE.BufferGeometry, m: THREE.Material, x = 0, y = 0, z = 0) => {
     const mesh = new THREE.Mesh(geo, m);
     mesh.position.set(x, y, z);
     grp.add(mesh);
     return mesh;
   };
-  // caisse basse et cabine
-  add(rb(1.85, 0.82, 4.8, 0.16), paint, 0, 0.86, 0);
-  add(rb(1.72, 0.66, 2.9, 0.14), paint, 0, 1.58, 0.35);
-  // vitres : un bandeau teinté légèrement en retrait de la cabine
-  add(rb(1.76, 0.42, 2.7, 0.1), glass, 0, 1.6, 0.35);
+
+  // caisse : profil latéral (capot, pare-brise, toit, hayon)
+  add(profile([
+    [2.4, 0.42], [2.42, 0.95], [1.35, 1.12], [1.12, 1.16], [0.38, 1.8], [-1.95, 1.82],
+    [-2.32, 1.7], [-2.4, 0.95], [-2.38, 0.42],
+  ], W), paint);
+  // vitres : un profil un peu en retrait, un poil plus large (elles affleurent sur les côtés)
+  add(profile([[1.06, 1.2], [0.4, 1.73], [-1.9, 1.75], [-2.22, 1.64], [-2.22, 1.22]], W + 0.02, 0.02), glass);
+  // montants (B et C) peints, par-dessus les vitres
+  for (const u of [-0.2, -1.25]) add(new THREE.BoxGeometry(W + 0.05, 0.5, 0.1), paint, 0, 1.47, -u);
+  // jupe basse, élargisseurs d'ailes, marchepieds
+  add(new THREE.BoxGeometry(W + 0.04, 0.16, 4.7), trim, 0, 0.42, 0);
+  for (const x of [-1, 1]) {
+    for (const z of [-1.5, 1.45]) add(new THREE.BoxGeometry(0.12, 0.42, 1.05), trim, x * (W / 2 + 0.02), 0.78, z);
+    add(new THREE.BoxGeometry(0.22, 0.06, 1.8), chrome, x * (W / 2 + 0.08), 0.42, 0);
+    // rétroviseurs
+    add(new THREE.BoxGeometry(0.2, 0.14, 0.12), paint, x * (W / 2 + 0.1), 1.25, -1.05);
+  }
+  // calandre chromée, phares, feux arrière
+  add(new THREE.BoxGeometry(1.3, 0.32, 0.06), trim, 0, 0.84, -2.43);
+  for (const y of [0.76, 0.86, 0.96]) add(new THREE.BoxGeometry(1.24, 0.03, 0.07), chrome, 0, y, -2.45);
+  for (const x of [-1, 1]) {
+    add(new THREE.BoxGeometry(0.42, 0.12, 0.06), head, x * 0.68, 0.98, -2.43);
+    add(new THREE.BoxGeometry(0.14, 0.34, 0.06), tail, x * 0.82, 1.15, 2.4);
+  }
+  // pare-chocs
+  add(new THREE.BoxGeometry(W + 0.06, 0.18, 0.2), trim, 0, 0.5, -2.42);
+  add(new THREE.BoxGeometry(W + 0.06, 0.18, 0.2), trim, 0, 0.5, 2.4);
   // barres de toit
-  for (const x of [-0.7, 0.7]) add(rb(0.06, 0.06, 2.4, 0.02), rim, x, 1.95, 0.35);
-  // calandre et phares (avant = -z)
-  add(rb(1.4, 0.3, 0.06, 0.03), glass, 0, 0.92, -2.41);
-  for (const x of [-0.72, 0.72]) add(rb(0.34, 0.12, 0.06, 0.03), light, x, 1.1, -2.41);
-  // roues
-  const wheel = new THREE.TorusGeometry(0.3, 0.13, 10, 24);
+  for (const x of [-0.72, 0.72]) add(new THREE.BoxGeometry(0.05, 0.06, 2.6), chrome, x, 1.87, 0.6);
+  // roues : pneu, jante, moyeu
+  const wheel = new THREE.TorusGeometry(0.29, 0.14, 12, 28);
   wheel.rotateY(Math.PI / 2);
-  const hub = new THREE.CylinderGeometry(0.2, 0.2, 0.1, 16);
-  hub.rotateZ(Math.PI / 2);
+  const rimGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.12, 20);
+  rimGeo.rotateZ(Math.PI / 2);
   for (const x of [-0.86, 0.86]) {
     for (const z of [-1.5, 1.45]) {
       add(wheel, tyre, x, 0.43, z);
-      add(hub, rim, x * 1.04, 0.43, z);
+      add(rimGeo, chrome, x * 1.04, 0.43, z);
     }
   }
   return grp;

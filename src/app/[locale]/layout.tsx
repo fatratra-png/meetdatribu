@@ -12,6 +12,9 @@ import Loader from "@/components/scenes/Loader";
 import FooterCta from "@/components/scenes/FooterCta";
 import ChapterIndex from "@/components/ui/ChapterIndex";
 import "../globals.css";
+// styles des pages /astuces et /tribu, chargés partout : sinon Next les
+// précharge sur l'accueil (préchargement des liens) sans les utiliser
+import "@/components/content/pages.css";
 
 export const SITE_URL = "https://meetdatribu.vercel.app";
 

@@ -3,7 +3,9 @@
     "title": "Meet da Tribu — le guide de survie à HEI",
     "description": "Tout ce que les nouveaux de HEI auraient aimé savoir : se repérer sur le campus, maîtriser les outils, et les conseils de la Tribu.",
     "astucesTitle": "Les astuces de la Tribu",
-    "tribuTitle": "L'équipe et les partenaires de HEI"
+    "tribuTitle": "L'équipe et les partenaires de HEI",
+    "astucesDescription": "Les astuces des étudiants de HEI pour bien démarrer : se repérer, les outils, les bons conseils.",
+    "tribuDescription": "L'équipe pédagogique de HEI et ses entreprises partenaires."
   },
   "a11y": {
     "skip": "Aller au contenu",
@@ -30,11 +32,32 @@
   },
   "astuces": {
     "kicker": "TOUTES LES ASTUCES",
-    "title": "Les astuces que la Tribu se transmet"
+    "titleA": "{n} astuces que la Tribu",
+    "titleIt": "se transmet.",
+    "lead": "Collectées auprès des étudiants de HEI. Filtre par thème, cherche un mot, ou laisse le hasard choisir.",
+    "searchLabel": "Chercher une astuce",
+    "searchPlaceholder": "Chercher : Drive, parking, binôme…",
+    "filterLabel": "Filtrer par thème",
+    "cat": {
+      "all": "Toutes",
+      "reperes": "Se repérer",
+      "outils": "Outils",
+      "conseils": "Conseils"
+    },
+    "random": "Astuce au hasard",
+    "count": "{n, plural, =0 {Aucune astuce} one {# astuce} other {# astuces}}",
+    "empty": "Aucune astuce ne correspond. Essaie un autre mot."
   },
   "tribu": {
     "kicker": "LA TRIBU HEI",
-    "title": "Les visages derrière la Tribu"
+    "titleA": "{team} formateurs experts,",
+    "titleIt": "{partners} entreprises partenaires.",
+    "lead": "Ceux qui t'enseignent, et les entreprises qui travaillent avec HEI pour l'employabilité de ses étudiants.",
+    "teamTitle": "L'ÉQUIPE PÉDAGOGIQUE",
+    "photoAlt": "Portrait de {name}",
+    "partnersTitle": "NOS PARTENAIRES",
+    "partnersLead": "L'employabilité des étudiants repose aussi sur le soutien et la collaboration de ces entreprises.",
+    "source": "SOURCE : HEI.SCHOOL (NOMS, TITRES, PHOTOS ET LOGOS)"
   },
   "notFound": {
     "title": "Cette page s'est perdue sur le campus.",

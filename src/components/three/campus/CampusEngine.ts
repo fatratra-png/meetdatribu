@@ -14,6 +14,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { gsap } from "gsap";
 import { FLOOR_HEIGHT, type FloorId } from "@/content/campus";
 import { buildCampus, GOLD, MODEL_CENTER } from "./model";
+import { animatePeople } from "./people";
 import { claimRenderer, getSharedRenderer, ownsRenderer } from "../sharedRenderer";
 import { EXPLORE_AT } from "./constants";
 
@@ -140,6 +141,14 @@ export class CampusEngine {
     this.autoRotate = on;
   }
 
+  /** Crochet de contrôle qualité : place la caméra (captures automatisées). */
+  inspect(px: number, py: number, pz: number, tx: number, ty: number, tz: number) {
+    this.tween?.kill();
+    Object.assign(this.view, { px, py, pz, tx, ty, tz });
+    this.yaw = 0;
+    this.dirty = true;
+  }
+
   /** Une interaction de l'utilisateur : la rotation automatique se met en pause. */
   poke() {
     this.lastInput = performance.now();
@@ -242,6 +251,11 @@ export class CampusEngine {
         this.fade.set(f.id, cur + (want - cur) * Math.min(1, dt * 8 || 1));
         this.dirty = true;
       }
+    }
+    // les étudiants du Rooftop bougent en continu (seulement quand on dessine)
+    if (this.model.people.length) {
+      animatePeople(this.model.people, now / 1000);
+      this.dirty = true;
     }
     if (!this.dirty) return;
     this.dirty = false;

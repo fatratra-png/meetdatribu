@@ -198,7 +198,9 @@ body.is-ready .topbar.is-hidden { transform: translateY(-101%); }
 }
 @media (max-width: 400px) {
   /* 320 px : tout tient sur une ligne, la langue ne montre que l'autre */
-  .topbar-mark { font-size: 14px; gap: 6px; }
+  /* sous 400 px : les crochets HEI seuls (le nom reste dans l'aria-label) */
+  .topbar-name { display: none; }
+  .topbar-mark svg { width: 22px; height: 22px; }
   .lang-switch button[aria-pressed="true"] { display: none; }
 }
 

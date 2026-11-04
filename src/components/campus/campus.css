@@ -99,7 +99,7 @@
 
 /* fiche de la salle (Framer Motion) */
 .campus-card {
-  position: absolute; right: var(--gutter); bottom: 8vh; z-index: 6;
+  position: absolute; right: calc(var(--gutter) + var(--index-space, 0px)); bottom: 8vh; z-index: 6;
   width: min(360px, 86vw);
   padding: 24px 24px 20px;
   background: var(--surface); color: var(--ink);

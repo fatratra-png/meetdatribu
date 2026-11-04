@@ -96,6 +96,8 @@ export default function CampusTour() {
         const e2 = engine;
         // le moteur peut finir de charger alors qu'on est déjà dans la section
         e2.setProgress(progressRef.current);
+        // crochet de contrôle qualité (comme window.__glassSite pour le verre)
+        (window as unknown as { __campus?: CampusEngine }).__campus = e2;
         e2.setAutoRotate(window.matchMedia("(max-width: 767px)").matches);
         // couleur de fond = celle du thème courant
         const syncBg = () => e2.setBackground(getComputedStyle(document.documentElement).getPropertyValue("--bg").trim() || "#000a1f");

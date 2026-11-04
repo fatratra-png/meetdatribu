@@ -3,7 +3,9 @@
     "title": "Meet da Tribu — the HEI survival guide",
     "description": "Everything new HEI students wish they had known: finding your way on campus, mastering the tools, and advice from the Tribe.",
     "astucesTitle": "Tips from the Tribe",
-    "tribuTitle": "HEI's team and partners"
+    "tribuTitle": "HEI's team and partners",
+    "astucesDescription": "HEI students' tips for a good start: finding your way, the tools, good advice.",
+    "tribuDescription": "HEI's teaching team and partner companies."
   },
   "a11y": {
     "skip": "Skip to content",
@@ -30,11 +32,32 @@
   },
   "astuces": {
     "kicker": "ALL THE TIPS",
-    "title": "The tips the Tribe passes on"
+    "titleA": "{n} tips the Tribe",
+    "titleIt": "passes on.",
+    "lead": "Collected from HEI students. Filter by theme, search for a word, or let chance decide.",
+    "searchLabel": "Search for a tip",
+    "searchPlaceholder": "Search: Drive, parking, study partner…",
+    "filterLabel": "Filter by theme",
+    "cat": {
+      "all": "All",
+      "reperes": "Finding your way",
+      "outils": "Tools",
+      "conseils": "Advice"
+    },
+    "random": "Random tip",
+    "count": "{n, plural, =0 {No tips} one {# tip} other {# tips}}",
+    "empty": "No tip matches. Try another word."
   },
   "tribu": {
     "kicker": "THE HEI TRIBE",
-    "title": "The faces behind the Tribe"
+    "titleA": "{team} expert trainers,",
+    "titleIt": "{partners} partner companies.",
+    "lead": "The people who teach you, and the companies working with HEI on its students' employability.",
+    "teamTitle": "THE TEACHING TEAM",
+    "photoAlt": "Portrait of {name}",
+    "partnersTitle": "OUR PARTNERS",
+    "partnersLead": "Students' employability also relies on the support and collaboration of these companies.",
+    "source": "SOURCE: HEI.SCHOOL (NAMES, TITLES, PHOTOS AND LOGOS)"
   },
   "notFound": {
     "title": "This page got lost on campus.",

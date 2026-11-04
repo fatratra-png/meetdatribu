@@ -198,3 +198,30 @@ celles-ci. Conservés tels quels : le verre 3D (phase 2) et la bande devise
     14 deux-roues en volumes simples (scooters, motos de compétition,
     roadsters) en deux colonnes, nez vers l'extérieur ; parking vers le centre,
     dans l'axe du portail ; allée dorée du portail à Villa Joell (`campus/bikes.ts`).
+
+## Phase 4 — Contenu
+
+51. **Les outils** : bento de 4 cartes (grande / haute / haute / grande) qui se
+    retournent (Framer Motion) : recto = à quoi ça sert, verso = l'astuce.
+    5 outils demandés → 4 tuiles : Mimo est rangé avec HTML/CSS (s'entraîner
+    au web), règle du skill « 4 piliers valent mieux que 5 demi-piliers ».
+52. **La Tribu en chiffres** : +350 étudiants et +4 ans (hei.school), puis la
+    situation des diplômés Mpamakilay 10 mois après la soutenance (infographie
+    HEI), en barres horizontales triées : une seule série, une teinte neutre,
+    l'or sur la barre qui porte le message (skill dataviz). Tableau équivalent
+    pour les lecteurs d'écran, sources citées sous le graphique.
+53. **/astuces** : 15 astuces PLACEHOLDER (en attendant le Google Form) en 3
+    catégories MECE (se repérer / outils / conseils), recherche, filtres en
+    pastilles animées (`layoutId`), cartes qui se réorganisent (`layout`),
+    bouton « astuce au hasard ».
+54. **/tribu** : l'équipe pédagogique (noms, titres et photos de hei.school,
+    titres traduits en anglais) et les 16 partenaires en bandeau infini (pause
+    au survol, grille statique en mouvement réduit).
+55. **Index des chapitres** : place réservée à droite (150 px ≥ 1100 px de large)
+    pour qu'il ne recouvre jamais le contenu.
+56. **Barre de navigation sous 400 px** : seuls les crochets HEI restent visibles
+    (le nom est dans l'aria-label), sinon le CTA débordait à 320 px.
+57. **Crédit du footer** : « Fait par FATRATRA, assistant pédagogique LEI 2026 ».
+58. **Rooftop** : étudiants articulés (MacBook sous le bras, sandwich, danse),
+    tee-shirts bleus, blancs et orange ; SUV grenat au gabarit d'un Toyota
+    Fortuner (profil extrudé, sans logo).
