@@ -86,7 +86,7 @@
       "meta": "BEFORE DAY 1 · THE CAMPUS",
       "title": "Find the campus before day one.",
       "desc": "II J 161 R, Ambodivoanjo, Ivandry. The front desk is open Monday to Friday, 8am-12pm and 1pm-4pm.",
-      "imageAlt": "The HEI building in Ivandry, with its courtyard and white walkways"
+      "imageAlt": "The HEI building in Ivandry, seen from the entrance, with its white walkways"
     },
     "s2": {
       "big": "D1",
@@ -100,7 +100,7 @@
       "meta": "WEEKS 1 AND 2 · THE LEI",
       "title": "The LEI sets your foundations in two weeks.",
       "desc": "L'École d'Informatique, mandatory for every first-year: the tools, HTML/CSS, and your class. The final project: your own survival guide.",
-      "imageAlt": "New students gathered in the courtyard during the welcome week"
+      "imageAlt": "New students gathered during the welcome week"
     },
     "s4": {
       "big": "+",
@@ -177,7 +177,7 @@
     "titleA": "Before your first class, there is",
     "titleIt": "the Tribe.",
     "lead": "Over 350 students, clubs, hackathons, a class that helps each other. You are joining a family.",
-    "imageAlt": "Hundreds of HEI students dancing together in the courtyard during the 2024 welcome week",
+    "imageAlt": "Hundreds of HEI students dancing together during the 2024 welcome week",
     "say": "Over 350 students, one family."
   },
   "advice": {
@@ -216,12 +216,12 @@
     "titleIt": "floor by floor.",
     "steps": {
       "0": "Bird's-eye view",
-      "1": "Half-turn above the courtyard",
-      "2": "The entrance, from the courtyard",
+      "1": "Half-turn above the school",
+      "2": "The entrance: Villa Joell",
       "3": "Lifting the roof",
       "4": "Your turn: tap a room"
     },
-    "stillAlt": "3D model of the HEI campus: a white L-shaped building around a courtyard, floors pulled apart, rooms in blue and a roof terrace under a canopy",
+    "stillAlt": "3D model of the HEI campus: a white L-shaped building, floors pulled apart, rooms in blue, the Rooftop over the whole roof and the motorbike parking at the entrance",
     "searchLabel": "Search for a room",
     "searchPlaceholder": "Search for a room…",
     "results": "{n, plural, =0 {No rooms} one {# room found} other {# rooms found}}",

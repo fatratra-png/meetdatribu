@@ -86,7 +86,7 @@
       "meta": "AVANT LE JOUR 1 · LE CAMPUS",
       "title": "Repère le campus avant la rentrée.",
       "desc": "II J 161 R, Ambodivoanjo, Ivandry. L'accueil est ouvert du lundi au vendredi, de 8 h à 12 h et de 13 h à 16 h.",
-      "imageAlt": "Le bâtiment de HEI à Ivandry, avec sa cour et ses coursives blanches"
+      "imageAlt": "Le bâtiment de HEI à Ivandry, vu depuis l'entrée, avec ses coursives blanches"
     },
     "s2": {
       "big": "J1",
@@ -100,7 +100,7 @@
       "meta": "SEMAINES 1 ET 2 · LE LEI",
       "title": "Le LEI pose tes bases en deux semaines.",
       "desc": "L'École d'Informatique, obligatoire pour tous les L1 : les outils, le HTML/CSS, et ta promo. À la clé, ton propre guide de survie.",
-      "imageAlt": "Les nouveaux étudiants rassemblés dans la cour pendant l'intégration"
+      "imageAlt": "Les nouveaux étudiants rassemblés pendant l'intégration"
     },
     "s4": {
       "big": "+",
@@ -177,7 +177,7 @@
     "titleA": "Avant le premier cours, il y a",
     "titleIt": "la Tribu.",
     "lead": "Plus de 350 étudiants, des clubs, des hackathons, une promo qui s'entraide. Tu arrives dans une famille.",
-    "imageAlt": "Des centaines d'étudiants de HEI dansent ensemble dans la cour pendant l'intégration 2024",
+    "imageAlt": "Des centaines d'étudiants de HEI dansent ensemble pendant l'intégration 2024",
     "say": "Plus de 350 étudiants, une seule famille."
   },
   "advice": {
@@ -216,12 +216,12 @@
     "titleIt": "étage par étage.",
     "steps": {
       "0": "Vue du ciel",
-      "1": "Demi-tour au-dessus de la cour",
-      "2": "L'entrée, côté cour",
+      "1": "Demi-tour au-dessus de l'école",
+      "2": "L'entrée : Villa Joell",
       "3": "On soulève le toit",
       "4": "À toi : touche une salle"
     },
-    "stillAlt": "Maquette 3D du campus HEI : un bâtiment blanc en L autour d'une cour, étages écartés, salles en bleu et toit-terrasse sous une toile",
+    "stillAlt": "Maquette 3D du campus HEI : un bâtiment blanc en L, étages écartés, salles en bleu, le Rooftop sur tout le toit et le parking motos devant l'entrée",
     "searchLabel": "Chercher une salle",
     "searchPlaceholder": "Chercher une salle…",
     "results": "{n, plural, =0 {Aucune salle} one {# salle trouvée} other {# salles trouvées}}",

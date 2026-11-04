@@ -7,7 +7,7 @@
  * sont estimées : elles sont marquées // PLACEHOLDER.
  *
  * Coordonnées en MÈTRES, vues de dessus : x vers la droite (est), z vers le
- * bas (le côté de la cour et de l'entrée).
+ * bas (le côté du parking et de l'entrée).
  *
  *   RDC : Villa Joell (entrée, administration) → salle des profs → cuisine →
  *         WC filles (minuscule, non affiché dans la visite). Face au mur des WC, à droite sur 3 m, puis
@@ -16,10 +16,11 @@
  *         séparées par une baie vitrée et reliées par une véranda. PI et
  *         Sigma s'étalent de Villa Joell jusqu'aux toilettes et forment un L
  *         avec NP (au-dessus de la salle B).
+ *   Devant : pas de cour, un parking à motos de la taille de Villa Joell.
  *   Toit : le fameux Rooftop, c'est TOUT le toit, au-dessus de PI, Sigma et NP.
  * Recoupé avec la photo du campus publiée par HEI (public/hei/) : véranda en
- * L à garde-corps noirs, galerie à poteaux sous l'aile de droite, escalier
- * extérieur à gauche, toile tendue sur une partie du toit.
+ * L à garde-corps noirs, galerie à poteaux sous l'aile de droite, toile tendue
+ * sur une partie du toit. Les escaliers ne sont pas représentés.
  */
 
 export type Localized = { fr: string; en: string };
@@ -45,7 +46,7 @@ export type Room = {
 export const FLOOR_HEIGHT = 3.4;
 
 /** Emprise totale du bâti, pour le mini-plan. PLACEHOLDER (estimée). */
-export const FOOTPRINT = { x: -7.5, w: 38.5, d: 19 };
+export const FOOTPRINT = { x: 0, w: 31, d: 17 };
 
 export const FLOORS: Floor[] = [
   { id: "rdc", level: 0, name: { fr: "Rez-de-chaussée", en: "Ground floor" }, short: { fr: "RDC", en: "GF" } },
@@ -78,18 +79,11 @@ export const ROOF_OUTLINE: [number, number][] = [
 /** La toile tendue sur une partie du Rooftop (vue sur la photo). PLACEHOLDER. */
 export const CANOPY: Rect = [3, 0.6, 14, 5.8];
 
-/** Escaliers extérieurs (une volée du RDC au 1er chacun). PLACEHOLDER : dimensions estimées.
- *  `rise` = direction de la montée ; `landing` = palier au 1er qui rejoint la véranda. */
-export type Stair = { rect: Rect; rise: "west" | "east" | "north" | "south"; landing?: Rect };
-export const STAIRS: Stair[] = [
-  // à gauche, le long de la façade : on monte vers la gauche, puis un palier
-  // au niveau du 1er ramène au bout de la véranda
-  { rect: [-6, 9, 6, 2], rise: "west", landing: [-7.4, 7, 7.4, 2] },
-  // au pied de la salle B : on monte le long de l'aile, jusqu'à la véranda devant NP
-  { rect: [20, 9, 2, 7], rise: "north" },
-];
+/** Mur d'enceinte autour de l'école, avec le portail (ouverture) devant Villa Joell.
+ *  PLACEHOLDER : tracé et hauteur estimés. */
+export const ENCLOSURE = { x0: -2, z0: -2, x1: 33, z1: 17.5, height: 2.2, gate: [0.5, 7.5] as [number, number] };
 
-/** Véranda du 1er étage, en L, côté cour : devant PI et Sigma, puis devant NP.
+/** Véranda du 1er étage, en L, côté parking : devant PI et Sigma, puis devant NP.
  *  Au RDC, des poteaux la portent (galerie). PLACEHOLDER : largeurs estimées. */
 export const VERANDAS: Rect[] = [
   [0, 7, 24, 2],
@@ -140,21 +134,21 @@ export const ROOMS: Room[] = [
     kind: "class",
     name: { fr: "Salle B", en: "Room B" },
     desc: {
-      fr: "Face au mur des toilettes, tourne à droite, avance de 3 m, puis tourne encore à droite : c'est la salle B. Un escalier extérieur, à son pied, monte à la salle NP.",
-      en: "Facing the restroom wall, turn right, walk 3 m, then turn right again: that's Room B. An outdoor staircase at its foot leads up to Room NP.",
+      fr: "Face au mur des toilettes, tourne à droite, avance de 3 m, puis tourne encore à droite : c'est la salle B.",
+      en: "Facing the restroom wall, turn right, walk 3 m, then turn right again: that's Room B.",
     },
     rect: [24, 3, 7, 13], // PLACEHOLDER : longueur estimée
   },
   {
-    id: "cour",
+    id: "parking",
     floor: "rdc",
     kind: "outdoor",
-    name: { fr: "La cour", en: "The courtyard" },
+    name: { fr: "Parking motos", en: "Motorbike parking" },
     desc: {
-      fr: "L'espace devant les salles, où l'on se retrouve entre deux cours.",
-      en: "The open space in front of the rooms, where everyone meets between classes.",
+      fr: "Pas de cour à HEI : devant Villa Joell, juste derrière le portail, c'est le parking des deux-roues. Scooters, motos de compétition, roadsters : gare-toi droit et laisse l'allée libre.",
+      en: "There's no courtyard at HEI: in front of Villa Joell, just past the gate, is the two-wheeler parking. Scooters, racing bikes, roadsters: park straight and keep the aisle clear.",
     },
-    rect: [0, 9, 22, 10], // PLACEHOLDER : emprise de la cour non décrite
+    rect: [0, 9, 9, 7], // mêmes dimensions que Villa Joell (PLACEHOLDER comme elle)
   },
 
   // ─── 1er étage ───
@@ -175,10 +169,10 @@ export const ROOMS: Room[] = [
     kind: "class",
     name: { fr: "Salle Sigma", en: "Room Sigma" },
     desc: {
-      fr: "L'autre moitié de la salle ALGÈBRE, derrière la baie vitrée. Elle file jusqu'au-dessus des toilettes, et forme un L avec la salle NP.",
-      en: "The other half of the ALGÈBRE room, behind the glass bay. It runs all the way above the restroom, forming an L with Room NP.",
+      fr: "L'autre moitié de la salle ALGÈBRE, derrière la baie vitrée. Elle file jusqu'à l'angle, où elle touche la salle NP : ensemble, elles forment un L.",
+      en: "The other half of the ALGÈBRE room, behind the glass bay. It runs to the corner, where it meets Room NP: together they form an L.",
     },
-    rect: [10.9, 0, 10.9, 7], // PLACEHOLDER : …jusqu'au droit des toilettes (x = 21,8)
+    rect: [10.9, 0, 13.1, 7], // PLACEHOLDER : …jusqu'à l'angle, où elle touche NP
   },
   {
     id: "veranda",
@@ -186,8 +180,8 @@ export const ROOMS: Room[] = [
     kind: "circulation",
     name: { fr: "Véranda", en: "Veranda" },
     desc: {
-      fr: "En L, côté cour : elle longe PI et Sigma, puis NP. C'est par là qu'on passe de la salle PI à la salle Sigma ; l'escalier extérieur y monte.",
-      en: "L-shaped, on the courtyard side: it runs along PI and Sigma, then NP. This is how you go from Room PI to Room Sigma; the outdoor stairs come up to it.",
+      fr: "En L, côté parking : elle longe PI et Sigma, puis NP. C'est par là qu'on passe de la salle PI à la salle Sigma.",
+      en: "L-shaped, on the parking side: it runs along PI and Sigma, then NP. This is how you go from Room PI to Room Sigma.",
     },
     rect: [0, 7, 24, 2],
   },
@@ -197,10 +191,10 @@ export const ROOMS: Room[] = [
     kind: "class",
     name: { fr: "Salle NP", en: "Room NP" },
     desc: {
-      fr: "Au-dessus de la salle B, dans l'aile de droite : avec Sigma, elle forme le L de l'étage. On y monte par l'escalier extérieur, au pied de la salle B.",
-      en: "Above Room B, in the right-hand wing: together with Sigma it forms the L of the upper floor. Reach it by the outdoor stairs at the foot of Room B.",
+      fr: "Au-dessus de la salle B, dans l'aile de droite : avec Sigma, elle forme le L de l'étage.",
+      en: "Above Room B, in the right-hand wing: together with Sigma it forms the L of the upper floor.",
     },
-    rect: [24, 3, 7, 13], // PLACEHOLDER
+    rect: [24, 0, 7, 16], // PLACEHOLDER : toute l'aile, elle touche Sigma
   },
 
   // ─── Toit ───

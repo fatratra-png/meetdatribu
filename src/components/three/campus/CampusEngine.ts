@@ -32,7 +32,7 @@ const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const seg = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-/** Pose sur une orbite autour de CENTER (angle en radians, 0 = côté cour). */
+/** Pose sur une orbite autour de CENTER (angle en radians, 0 = côté entrée). */
 function orbit(angle: number, radius: number, height: number): Pose {
   return {
     pos: new THREE.Vector3(CENTER.x + Math.sin(angle) * radius, height, CENTER.z + Math.cos(angle) * radius),
@@ -40,10 +40,10 @@ function orbit(angle: number, radius: number, height: number): Pose {
   };
 }
 
-/** Pose de vue d'ensemble, une fois la maquette éclatée (vue 3/4 côté cour). */
+/** Pose de vue d'ensemble, une fois la maquette éclatée (vue 3/4 côté entrée). */
 const OVERVIEW = pose(52, 50, 64, 13, 5, 8);
-/** Devant Villa Joell (l'entrée), à hauteur d'yeux, depuis la cour. */
-const ENTRANCE = pose(4, 2.2, 24, 4, 2.4, 4);
+/** Devant le portail, à hauteur d'yeux : le parking, puis Villa Joell. */
+const ENTRANCE = pose(4, 2.2, 22, 4, 2.0, 4);
 
 export type HotspotPoint = { id: string; x: number; y: number; visible: boolean };
 
@@ -208,7 +208,7 @@ export class CampusEngine {
     if (p < 0.12) return aerial;
     if (p < 0.38) {
       const t = ease(seg(p, 0.12, 0.38));
-      // demi-tour : de la rue (π) à la cour (2π), en descendant
+      // demi-tour : de l'arrière (π) à l'entrée (2π), en descendant
       return orbit(Math.PI + t * Math.PI, 10 + t * 44, 82 - t * 48);
     }
     const turned = orbit(2 * Math.PI, 54, 34);

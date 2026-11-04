@@ -4,11 +4,12 @@
  * couleurs du site : blanc cassé pour la structure, nuances du navy HEI pour
  * les salles, or HEI pour le chemin d'entrée et la salle choisie.
  * L'agencement vient de src/content/campus.ts (SLABS, VERANDAS, GLASS_BAY,
- * STAIRS, ROOF_OUTLINE, CANOPY, ROOMS). Chaque niveau est un groupe nommé `floor-<id>`, chaque salle un
+ * ENCLOSURE, ROOF_OUTLINE, CANOPY, ROOMS). Les escaliers ne sont pas représentés. Chaque niveau est un groupe nommé `floor-<id>`, chaque salle un
  * mesh nommé `room-<id>`.
  */
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { createBikeFactory, parkBikes } from "./bikes";
 import {
   FLOOR_HEIGHT,
   FLOORS,
@@ -16,8 +17,8 @@ import {
   ROOMS,
   SLABS,
   CANOPY as CANOPY_RECT,
+  ENCLOSURE,
   ROOF_OUTLINE,
-  STAIRS,
   VERANDAS,
   type FloorId,
   type Rect,
@@ -35,11 +36,10 @@ const KIND_COLOR: Record<RoomKind, string> = {
 };
 const STRUCTURE = "#f4f1ea";
 const BASE = "#e6e0d4";
-const COURT = "#d6ccb8";
 const CANOPY = "#e8cfa3";
 export const GOLD = "#dfa408";
 /** Le centre de la maquette (m) : cible des vues d'ensemble. */
-export const MODEL_CENTER = new THREE.Vector3(14, 2, 9.5);
+export const MODEL_CENTER = new THREE.Vector3(14, 2, 8);
 
 export type FloorNode = { id: FloorId; level: number; group: THREE.Group; materials: THREE.MeshStandardMaterial[] };
 export type RoomNode = { id: string; floor: FloorId; mesh: THREE.Mesh | null; anchor: THREE.Object3D; base: THREE.Color };
@@ -71,32 +71,46 @@ export function buildCampus() {
   const floors = new Map<FloorId, FloorNode>();
   const rooms = new Map<string, RoomNode>();
 
-  // ── socle, cour, chemin d'entrée vers Villa Joell ──
-  const base = box(40, 0.8, 25, 0.35, mat(BASE, shared));
-  base.position.set(MODEL_CENTER.x, -0.4, MODEL_CENTER.z);
+  // ── socle, parking motos, allée d'entrée vers Villa Joell ──
+  const base = box(38, 0.8, 22, 0.35, mat(BASE, shared));
+  base.position.set(15.5, -0.4, 7.75);
   base.name = "socle";
   root.add(base);
-  const cour = ROOMS.find((r) => r.id === "cour");
-  if (cour) root.add(onRect(cour.rect, 0, 0.06, 0.03, mat(COURT, shared)));
-  // le chemin vers l'entrée, en or : il dit « c'est par ici »
-  // (le tapis rouge de la photo mène à la porte de Villa Joell)
-  const pathMesh = onRect([3.4, 7, 1.2, 12], 0.03, 0.08, 0.03, mat(GOLD, shared, { roughness: 0.6 }));
+  // pas de cour : un parking à motos, de la taille de Villa Joell, devant l'entrée
+  const parking = ROOMS.find((r) => r.id === "parking");
+  if (parking) {
+    const [px, pz, pw, pd] = parking.rect;
+    root.add(onRect(parking.rect, 0, 0.05, 0.03, mat("#8a8d93", shared, { roughness: 0.95 })));
+    // marquage au sol : une ligne blanche par rangée
+    const line = mat("#f4f1ea", shared);
+    for (const z of [pz + 0.3, pz + pd - 0.3]) root.add(onRect([px + 0.2, z - 0.04, pw - 0.4, 0.08], 0.05, 0.02, 0.01, line));
+    root.add(parkBikes(createBikeFactory(shared), parking.rect, [3.4, 4.6]));
+  }
+  // l'allée vers la porte de Villa Joell, en or : elle dit « c'est par ici »
+  const pathMesh = onRect([3.4, 7, 1.2, ENCLOSURE.z1 - 7], 0.03, 0.08, 0.03, mat(GOLD, shared, { roughness: 0.6 }));
   pathMesh.name = "chemin-entree";
   root.add(pathMesh);
-  for (const x of [2.1, 5.9]) {
-    const pillar = box(0.6, 2.2, 0.6, 0.08, mat(STRUCTURE, shared)); // portail
-    pillar.position.set(x, 1.1, 18.7);
+
+  // mur d'enceinte tout autour de l'école, ouvert sur le portail devant Villa Joell
+  const { x0, z0, x1, z1, height, gate } = ENCLOSURE;
+  const wallMat = mat("#cfc6b6", shared);
+  const wall = (r: Rect) => root.add(onRect(r, 0, height, 0.06, wallMat));
+  wall([x0, z0, x1 - x0, 0.25]); // nord
+  wall([x0, z0, 0.25, z1 - z0]); // ouest
+  wall([x1 - 0.25, z0, 0.25, z1 - z0]); // est
+  wall([x0, z1 - 0.25, gate[0] - x0, 0.25]); // sud, à gauche du portail
+  wall([gate[1], z1 - 0.25, x1 - gate[1], 0.25]); // sud, à droite du portail
+  // grand portail : deux piliers hauts et une traverse au-dessus de l'ouverture
+  const gateMat = mat(STRUCTURE, shared);
+  const pillarH = height + 1.2;
+  for (const x of gate) {
+    const pillar = box(0.9, pillarH, 0.9, 0.1, gateMat);
+    pillar.position.set(x, pillarH / 2, z1 - 0.12);
     root.add(pillar);
   }
-  const leaf = mat("#8fa58a", shared, { flatShading: true });
-  const trunk = mat("#a08f78", shared);
-  for (const [x, z, s] of [[14, 15, 1.1], [18, 12, 0.85]] as const) {
-    const t = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 1.4, 8), trunk);
-    t.position.set(x, 0.7, z);
-    const c = new THREE.Mesh(new THREE.IcosahedronGeometry(1.1 * s, 0), leaf);
-    c.position.set(x, 1.4 + 0.9 * s, z);
-    root.add(t, c);
-  }
+  const lintel = box(gate[1] - gate[0] + 0.9, 0.35, 0.5, 0.08, gateMat);
+  lintel.position.set((gate[0] + gate[1]) / 2, pillarH - 0.18, z1 - 0.12);
+  root.add(lintel);
 
   // ── niveaux ──
   for (const f of FLOORS) {
@@ -110,7 +124,7 @@ export function buildCampus() {
     for (const r of SLABS[f.id]) group.add(onRect(r, 0, 0.3, 0.12, structure));
 
     if (f.id === "rdc") {
-      // galerie : les poteaux qui portent la véranda du 1er, côté cour
+      // galerie : les poteaux qui portent la véranda du 1er, côté parking
       for (const [vx, vz, vw, vd] of VERANDAS) {
         const along = vw > vd;
         const n = Math.max(2, Math.round((along ? vw : vd) / 3.5));
@@ -123,31 +137,8 @@ export function buildCampus() {
       }
     }
 
-    // escaliers extérieurs : une volée du RDC au 1er (dans le groupe du RDC)
-    if (f.id === "rdc") {
-      const stepMat = mat("#d9d3c6", materials);
-      for (const { rect: [sx, sz, sw, sd], rise } of STAIRS) {
-        const steps = 12;
-        const alongX = rise === "west" || rise === "east";
-        const len = alongX ? sw : sd;
-        const run = len / steps;
-        for (let i = 0; i < steps; i++) {
-          const h = ((i + 1) / steps) * FLOOR_HEIGHT;
-          // la marche i est à la distance i * run du BAS de la volée
-          const d = i * run + run / 2;
-          const x = rise === "east" ? sx + d : rise === "west" ? sx + sw - d : sx + sw / 2;
-          const z = rise === "south" ? sz + d : rise === "north" ? sz + sd - d : sz + sd / 2;
-          const step = box(alongX ? run + 0.02 : sw, h, alongX ? sd : run + 0.02, 0.03, stepMat);
-          step.position.set(x, h / 2, z);
-          group.add(step);
-        }
-      }
-    }
-
     if (f.id === "r1") {
-      // paliers en haut des escaliers, qui rejoignent la véranda
-      for (const st of STAIRS) if (st.landing) group.add(onRect(st.landing, 0, 0.22, 0.08, structure));
-      // véranda en L côté cour, avec garde-corps (noirs sur la photo, ici en navy)
+      // véranda en L côté parking, avec garde-corps (noirs sur la photo, ici en navy)
       const rail = mat("#1d2433", materials);
       for (const [vx, vz, vw, vd] of VERANDAS) {
         group.add(onRect([vx, vz, vw, vd], 0, 0.22, 0.08, structure));
@@ -204,8 +195,8 @@ export function buildCampus() {
         // le point du Rooftop : au coin du L, au centre du toit
         anchor.position.set(22, 1.4, 4);
       } else if (r.kind === "outdoor") {
-        // la cour : pas de volume, un repère au sol
-        anchor.position.set(x + w / 2 + 2, 0.6, z + d / 2);
+        // le parking : pas de volume propre, le repère flotte au-dessus des motos
+        anchor.position.set(x + w / 2 + 2.2, 1.7, z + d / 2);
       } else if (r.kind === "circulation") {
         // la véranda : son volume est la dalle et le garde-corps
         anchor.position.set(x + w / 2, 1.4, z + d / 2);
@@ -244,7 +235,7 @@ export function buildCampus() {
     new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }),
   );
   shadow.rotation.x = -Math.PI / 2;
-  shadow.position.set(MODEL_CENTER.x, -0.82, MODEL_CENTER.z);
+  shadow.position.set(15.5, -0.82, 7.75);
   root.add(shadow);
 
   return { root, floors, rooms, shadowTex };

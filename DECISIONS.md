@@ -191,3 +191,9 @@ celles-ci. Conservés tels quels : le verre 3D (phase 2) et la bande devise
 49. **Bug corrigé** (r187) : un matériau compilé opaque ignore l'opacité ;
     passer en transparent demande `needsUpdate` (sinon le filtre d'étage ne
     fondait rien).
+50. **Retouches du 5 nov.** : Sigma s'étend jusqu'à l'angle et touche NP ;
+    escaliers retirés (non représentés) ; mur d'enceinte autour de l'école avec
+    un grand portail (7 m, piliers et traverse) devant Villa Joell ; pas de
+    cour : un **parking à motos** de la taille de Villa Joell (9 × 7 m), avec
+    14 deux-roues en volumes simples (scooters, motos de compétition,
+    roadsters) de part et d'autre de l'allée dorée (`campus/bikes.ts`).
