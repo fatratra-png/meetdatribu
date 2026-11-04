@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "title": "Meet da Tribu — the HEI survival guide",
+    "description": "Everything new HEI students wish they had known: finding your way on campus, mastering the tools, and advice from the Tribe.",
+    "astucesTitle": "Tips from the Tribe",
+    "tribuTitle": "HEI's team and partners"
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "mainNav": "Main navigation",
+    "home": "Meet da Tribu, home"
+  },
+  "nav": {
+    "discover": "Discover HEI",
+    "tribu": "The Tribe",
+    "cta": "The tips"
+  },
+  "theme": {
+    "toDark": "Switch to dark theme",
+    "toLight": "Switch to light theme"
+  },
+  "lang": {
+    "label": "Language",
+    "fr": "Français",
+    "en": "English"
+  },
+  "home": {
+    "kicker": "LEI 2026 · THE HEI SURVIVAL GUIDE",
+    "title": "Welcome to the Tribe",
+    "lead": "The site arrives scene by scene. Phase 1: the foundation is in place."
+  },
+  "astuces": {
+    "kicker": "ALL THE TIPS",
+    "title": "The tips the Tribe passes on"
+  },
+  "tribu": {
+    "kicker": "THE HEI TRIBE",
+    "title": "The faces behind the Tribe"
+  },
+  "notFound": {
+    "title": "This page got lost on campus.",
+    "back": "Back to home"
+  }
+}

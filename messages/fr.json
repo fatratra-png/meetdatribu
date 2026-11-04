@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "title": "Meet da Tribu — le guide de survie à HEI",
+    "description": "Tout ce que les nouveaux de HEI auraient aimé savoir : se repérer sur le campus, maîtriser les outils, et les conseils de la Tribu.",
+    "astucesTitle": "Les astuces de la Tribu",
+    "tribuTitle": "L'équipe et les partenaires de HEI"
+  },
+  "a11y": {
+    "skip": "Aller au contenu",
+    "mainNav": "Navigation principale",
+    "home": "Meet da Tribu, accueil"
+  },
+  "nav": {
+    "discover": "Découvrir HEI",
+    "tribu": "La Tribu",
+    "cta": "Les astuces"
+  },
+  "theme": {
+    "toDark": "Passer au thème sombre",
+    "toLight": "Passer au thème clair"
+  },
+  "lang": {
+    "label": "Langue",
+    "fr": "Français",
+    "en": "English"
+  },
+  "home": {
+    "kicker": "LEI 2026 · LE GUIDE DE SURVIE À HEI",
+    "title": "Bienvenue dans la Tribu",
+    "lead": "Le site arrive scène par scène. Phase 1 : le socle est en place."
+  },
+  "astuces": {
+    "kicker": "TOUTES LES ASTUCES",
+    "title": "Les astuces que la Tribu se transmet"
+  },
+  "tribu": {
+    "kicker": "LA TRIBU HEI",
+    "title": "Les visages derrière la Tribu"
+  },
+  "notFound": {
+    "title": "Cette page s'est perdue sur le campus.",
+    "back": "Retour à l'accueil"
+  }
+}

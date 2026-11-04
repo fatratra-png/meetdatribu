@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   MEET DA TRIBU — jetons de design (design tokens)
+   ---------------------------------------------------------------
+   Palette validée, issue du site hei.school :
+     · navy HEI  #001948  → la STRUCTURE (surfaces, encre en clair)
+     · or HEI    #DFA408  → l'ACCENT UNIQUE : il veut dire « regarde ici »
+   Tout le reste est neutre (skill color-and-brand-discipline).
+   Le thème se choisit avec <html data-theme="dark|light"> ;
+   le sombre est le thème par défaut.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root,
+:root[data-theme="dark"] {
+  --ink-rgb: 244, 241, 234;  /* composantes RGB du texte (pour les rgba) */
+  --bg: #000a1f;             /* toile de fond : navy HEI assombri */
+  --surface: #001948;        /* surfaces élevées : navy HEI pur */
+  --ink: #f4f1ea;            /* texte principal (15:1 sur le fond) */
+  --ink-soft: #a6afc2;       /* texte secondaire (9:1) */
+  --accent: #dfa408;         /* or HEI — fond d'accent */
+  --accent-ink: #001948;     /* texte posé SUR l'or (7,7:1) */
+  --accent-text: #dfa408;    /* or utilisé comme couleur de texte (8,9:1) */
+  --primary: #001948;        /* navy HEI, la couleur de structure */
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --ink-rgb: 0, 25, 72;
+  --bg: #faf8f3;
+  --surface: #ffffff;
+  --ink: #001948;            /* l'encre devient le navy HEI (17:1) */
+  --ink-soft: #5b6472;       /* 5,6:1 */
+  --accent: #dfa408;
+  --accent-ink: #001948;
+  --accent-text: #8a6400;    /* or foncé : l'or pur ne passe pas AA sur blanc */
+  --primary: #001948;
+  color-scheme: light;
+}
+
+:root {
+  /* filets : le texte à ~13-16 % d'opacité, comme dans le skill Site Immersif */
+  --hairline: rgba(var(--ink-rgb), 0.14);
+  --ink-faint: rgba(var(--ink-rgb), 0.16);
+
+  /* typographie : échelle courte et constante (skill gestalt) */
+  --t-heading: clamp(34px, 4.6vw, 57px);
+  --t-body: 19px;
+
+  /* grille unique : 12 colonnes desktop, 4 colonnes mobile */
+  --gutter: clamp(20px, 4vw, 64px);
+  --col-gap: clamp(12px, 1.6vw, 24px);
+  --radius: 2px;
+
+  /* courbes d'animation reprises telles quelles du skill Site Immersif */
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-inout: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Les jetons deviennent des classes Tailwind : bg-bg, text-ink, bg-accent… */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+  --color-primary: var(--primary);
+  --color-hairline: var(--hairline);
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease-out-expo: var(--ease-out);
+  --ease-in-out-quart: var(--ease-inout);
+}
+
+/* ═══ BASE ═══ */
+html {
+  scroll-behavior: auto; /* Lenis gère le défilement, pas le navigateur */
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--t-body);
+  letter-spacing: -0.007em;
+  line-height: 1.3;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.5s var(--ease-out), color 0.5s var(--ease-out);
+}
+h1, h2, h3 { font-weight: 400; }
+img { max-width: 100%; }
+
+/* focus clavier toujours visible (accessibilité) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* lien d'évitement : invisible tant qu'on ne tabule pas dessus */
+.skip-link {
+  position: fixed; top: 10px; left: 10px; z-index: 300;
+  padding: 10px 14px;
+  background: var(--accent); color: var(--accent-ink);
+  transform: translateY(-200%);
+  transition: transform 0.3s var(--ease-out);
+}
+.skip-link:focus-visible { transform: translateY(0); }
+
+/* kickers en CAPS mono (règle du skill Site Immersif) */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* Lenis : classes posées sur <html> par la librairie */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+
+/* ═══ GRILLE UNIQUE (skill gestalt-alignment-and-grid) ═══
+   12 colonnes au-dessus de 768 px, 4 colonnes en dessous.
+   Tout le contenu s'aligne sur ces lignes. */
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  padding-inline: var(--gutter);
+}
+@media (min-width: 768px) {
+  .site-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+}
+
+/* ═══ HEADER FLOTTANT (« dock » du skill Site Immersif) ═══
+   Desktop : pilule centrée en haut, qui entre en glissant.
+   Mobile : barre pleine largeur, à 10 px des bords, coins arrondis. */
+.dock {
+  position: fixed; top: 14px; left: 50%;
+  transform: translate(-50%, -180%);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: var(--radius);
+  display: flex; align-items: center;
+  gap: 6px;
+  padding: 8px 8px 8px 18px;
+  z-index: 100;
+  box-shadow: 0 0 0 1px var(--hairline);
+  transition:
+    transform 0.9s var(--ease-out) 0.15s,
+    opacity 0.32s var(--ease-out),
+    background-color 0.5s var(--ease-out);
+}
+body.is-ready .dock { transform: translate(-50%, 0); }
+/* pendant le relais du loader, le dock est déjà posé mais invisible */
+body.handoff .dock { transform: translate(-50%, 0); opacity: 0; transition: none; }
+
+.dock-wordmark { font-size: 19px; letter-spacing: -0.01em; font-weight: 500; margin-right: 14px; white-space: nowrap; }
+.dock-nav { display: flex; gap: 4px; margin-right: 8px; }
+.dock-link { padding: 9px 10px; position: relative; font-size: 16px; }
+.dock-link::after {
+  content: '';
+  position: absolute; left: 10px; right: 10px; bottom: 5px;
+  height: 1px; background: var(--ink);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.45s var(--ease-inout);
+}
+.dock-link:hover::after,
+.dock-link[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+.dock-cta {
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 16px;
+  white-space: nowrap;
+  transition: filter 0.3s;
+}
+.dock-cta:hover { filter: brightness(0.96); }
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 20px;
+    --t-heading: clamp(27px, 6.6vw, 40px);
+    --t-body: 17px;
+  }
+  .dock {
+    top: 10px; left: 10px; right: 10px;
+    width: auto;
+    transform: translateY(calc(-100% - 16px));
+    justify-content: space-between;
+    padding: 9px 10px 9px 14px;
+    gap: 8px; white-space: nowrap;
+    transition: transform 0.8s var(--ease-out) 0.1s, opacity 0.32s var(--ease-out);
+  }
+  body.is-ready .dock { transform: translateY(0); }
+  body.handoff .dock { transform: translateY(0); opacity: 0; }
+  .dock-wordmark { font-size: 17px; margin-right: 0; }
+  .dock-nav { margin-right: 0; margin-left: auto; }
+  .dock-nav .dock-link:first-child { display: none; }
+  .dock-cta { padding: 9px 12px; font-size: 13px; }
+}
+@media (max-width: 480px) {
+  :root { --gutter: 18px; }
+  .dock-nav { display: none; } /* sous 480 px : wordmark + réglages + CTA */
+}
+@media (max-width: 400px) {
+  /* écrans très étroits (320 px) : tout doit tenir sur UNE ligne.
+     Le sélecteur de langue ne montre plus que l'autre langue. */
+  .dock { gap: 4px; padding: 8px 8px 8px 12px; }
+  .dock-wordmark { font-size: 15px; }
+  .lang-switch button[aria-pressed="true"] { display: none; }
+  .dock-cta { padding: 8px 10px; font-size: 12px; }
+}
+
+/* ═══ MOUVEMENT RÉDUIT ═══ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
