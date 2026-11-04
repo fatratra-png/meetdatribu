@@ -42,8 +42,8 @@ function orbit(angle: number, radius: number, height: number): Pose {
 
 /** Pose de vue d'ensemble, une fois la maquette éclatée (vue 3/4 côté entrée). */
 const OVERVIEW = pose(52, 50, 64, 13, 5, 8);
-/** Devant le portail, à hauteur d'yeux : le parking, puis Villa Joell. */
-const ENTRANCE = pose(4, 2.2, 22, 4, 2.0, 4);
+/** Devant le portail, à hauteur d'yeux : le parking dans l'axe, l'école derrière. */
+const ENTRANCE = pose(14, 2.2, 22, 14, 2.0, 4);
 
 export type HotspotPoint = { id: string; x: number; y: number; visible: boolean };
 

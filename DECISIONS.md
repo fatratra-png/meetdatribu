@@ -196,4 +196,5 @@ celles-ci. Conservés tels quels : le verre 3D (phase 2) et la bande devise
     un grand portail (7 m, piliers et traverse) devant Villa Joell ; pas de
     cour : un **parking à motos** de la taille de Villa Joell (9 × 7 m), avec
     14 deux-roues en volumes simples (scooters, motos de compétition,
-    roadsters) de part et d'autre de l'allée dorée (`campus/bikes.ts`).
+    roadsters) en deux colonnes, nez vers l'extérieur ; parking vers le centre,
+    dans l'axe du portail ; allée dorée du portail à Villa Joell (`campus/bikes.ts`).

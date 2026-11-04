@@ -170,7 +170,9 @@
     "advice": "Les conseils",
     "voice": "Témoignage",
     "contact": "Contact",
-    "campus": "Le campus"
+    "campus": "Le campus",
+    "tools": "Les outils",
+    "figures": "En chiffres"
   },
   "orbit": {
     "kicker": "LA TRIBU HEI · AMBODIVOANJO, IVANDRY",
@@ -217,7 +219,7 @@
     "steps": {
       "0": "Vue du ciel",
       "1": "Demi-tour au-dessus de l'école",
-      "2": "L'entrée : Villa Joell",
+      "2": "L'entrée, par le portail",
       "3": "On soulève le toit",
       "4": "À toi : touche une salle"
     },
@@ -242,5 +244,57 @@
       "outdoor": "Extérieur",
       "circulation": "Circulation"
     }
+  },
+  "tools": {
+    "kicker": "LES OUTILS À CONNAÎTRE",
+    "titleA": "Quatre outils suffisent pour",
+    "titleIt": "ta première semaine.",
+    "lead": "Ce que tu ouvriras tous les jours à HEI. Retourne une carte pour lire l'astuce des anciens.",
+    "tipLabel": "L'ASTUCE",
+    "showTip": "L'astuce",
+    "back": "Retour",
+    "workspace": {
+      "name": "Google Workspace",
+      "what": "Ton bureau en ligne : formulaires, documents partagés, rendus de travaux et cours à distance.",
+      "tags": "FORMS · DOCS · DRIVE · MEET",
+      "tip": "Un dossier Drive par matière dès le jour 1, et tu retrouves tout en dix secondes en fin de semestre."
+    },
+    "web": {
+      "name": "HTML/CSS et Mimo",
+      "what": "Les bases du web, celles du projet du LEI. Mimo, l'appli pour t'entraîner un peu chaque jour.",
+      "tags": "HTML · CSS · MIMO",
+      "tip": "Dix minutes de Mimo dans le bus valent plus qu'une nuit blanche avant le rendu."
+    },
+    "ai": {
+      "name": "L'IA, ton mentor",
+      "what": "Pour comprendre une erreur, une notion, un exercice. Pas pour faire à ta place.",
+      "tags": "EXPLIQUER · REFORMULER · VÉRIFIER",
+      "tip": "Demande « explique-moi pourquoi », jamais « fais-le ». Ce que tu comprends, tu le gardes pour l'examen."
+    },
+    "intranet": {
+      "name": "L'intranet de HEI",
+      "what": "Emploi du temps, salles, annonces, notes : tout ce qui concerne ta scolarité.",
+      "tags": "ADMIN.HEI.SCHOOL",
+      "tip": "Un coup d'œil chaque matin avant de partir : c'est là qu'on apprend qu'un cours change de salle."
+    }
+  },
+  "figures": {
+    "kicker": "LA TRIBU EN CHIFFRES",
+    "titleA": "Dix mois après la Licence, 3 diplômés sur 4",
+    "titleIt": "travaillent, étudient ou entreprennent.",
+    "studentsLabel": "ÉTUDIANTS",
+    "yearsLabel": "D'EXISTENCE",
+    "yearsUnit": "ans",
+    "chartTitle": "Situation des diplômés de la promotion Mpamakilay, 10 mois après la soutenance",
+    "chartSub": "EN % DE LA PROMOTION",
+    "alumni": {
+      "job": "En poste dans une entreprise",
+      "masterAbroad": "En Master à l'étranger",
+      "masterMada": "En Master à Madagascar",
+      "founder": "Ont créé leur entreprise",
+      "searching": "En recherche d'emploi",
+      "unknown": "Situation inconnue"
+    },
+    "source": "SOURCES : HEI.SCHOOL (ÉTUDIANTS, ANNÉES) · INFOGRAPHIE HEI « SITUATION DES MPAMAKILAY AYANT VALIDÉ LEUR LICENCE, 10 MOIS APRÈS LEUR SOUTENANCE »"
   }
 }

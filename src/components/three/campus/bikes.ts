@@ -2,6 +2,7 @@
  * Les deux-roues du parking, en volumes simples (même registre que la
  * maquette : formes propres, arêtes arrondies, pas de détail réaliste).
  * Trois silhouettes : scooter, moto de compétition (carénée), roadster.
+ * Plus un SUV au centre (gabarit d'un Toyota Fortuner, stylisé, sans logo).
  * Géométries et matériaux partagés : 14 motos restent légères à dessiner.
  * Une moto est orientée le long de l'axe z, l'avant vers -z.
  */
@@ -127,4 +128,53 @@ export function parkBikes(bike: ReturnType<typeof createBikeFactory>, [px, pz, p
     });
   }
   return out;
+}
+
+/**
+ * Le SUV garé au centre du parking (gabarit d'un Toyota Fortuner : environ
+ * 4,8 × 1,85 × 1,8 m), stylisé comme le reste : caisse haute, vitres teintées,
+ * gros pneus, barres de toit. Orienté le long de z, nez vers -z.
+ */
+export function createSuv(materials: THREE.MeshStandardMaterial[]) {
+  const mk = (color: string, roughness: number, metalness: number) => {
+    const m = new THREE.MeshStandardMaterial({ color, roughness, metalness });
+    m.userData.baseOpacity = 1;
+    materials.push(m);
+    return m;
+  };
+  const paint = mk("#3a3f47", 0.3, 0.5);
+  const glass = mk("#141820", 0.15, 0.6);
+  const tyre = mk("#1b1d22", 0.9, 0);
+  const rim = mk("#c9ccd2", 0.3, 0.8);
+  const light = mk("#f4f1ea", 0.2, 0.1);
+  const grp = new THREE.Group();
+  grp.name = "suv-fortuner";
+  const add = (geo: THREE.BufferGeometry, m: THREE.Material, x: number, y: number, z: number) => {
+    const mesh = new THREE.Mesh(geo, m);
+    mesh.position.set(x, y, z);
+    grp.add(mesh);
+    return mesh;
+  };
+  // caisse basse et cabine
+  add(rb(1.85, 0.82, 4.8, 0.16), paint, 0, 0.86, 0);
+  add(rb(1.72, 0.66, 2.9, 0.14), paint, 0, 1.58, 0.35);
+  // vitres : un bandeau teinté légèrement en retrait de la cabine
+  add(rb(1.76, 0.42, 2.7, 0.1), glass, 0, 1.6, 0.35);
+  // barres de toit
+  for (const x of [-0.7, 0.7]) add(rb(0.06, 0.06, 2.4, 0.02), rim, x, 1.95, 0.35);
+  // calandre et phares (avant = -z)
+  add(rb(1.4, 0.3, 0.06, 0.03), glass, 0, 0.92, -2.41);
+  for (const x of [-0.72, 0.72]) add(rb(0.34, 0.12, 0.06, 0.03), light, x, 1.1, -2.41);
+  // roues
+  const wheel = new THREE.TorusGeometry(0.3, 0.13, 10, 24);
+  wheel.rotateY(Math.PI / 2);
+  const hub = new THREE.CylinderGeometry(0.2, 0.2, 0.1, 16);
+  hub.rotateZ(Math.PI / 2);
+  for (const x of [-0.86, 0.86]) {
+    for (const z of [-1.5, 1.45]) {
+      add(wheel, tyre, x, 0.43, z);
+      add(hub, rim, x * 1.04, 0.43, z);
+    }
+  }
+  return grp;
 }

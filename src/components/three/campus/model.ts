@@ -9,7 +9,7 @@
  */
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
-import { createBikeFactory, parkBikes } from "./bikes";
+import { createBikeFactory, createSuv, parkBikes } from "./bikes";
 import {
   FLOOR_HEIGHT,
   FLOORS,
@@ -85,11 +85,24 @@ export function buildCampus() {
     const line = mat("#f4f1ea", shared);
     for (const x of [px + 2.0, px + pw - 2.0]) root.add(onRect([x - 0.04, pz + 0.2, 0.08, pd - 0.4], 0.05, 0.02, 0.01, line));
     root.add(parkBikes(createBikeFactory(shared), parking.rect));
+    // au centre, entre les deux colonnes de motos : le SUV, nez vers le portail
+    const suv = createSuv(shared);
+    suv.position.set(px + pw / 2, 0.05, pz + pd / 2);
+    suv.rotation.y = Math.PI;
+    root.add(suv);
   }
-  // l'allée vers la porte de Villa Joell, en or : elle dit « c'est par ici »
-  const pathMesh = onRect([3.4, 7, 1.2, ENCLOSURE.z1 - 7], 0.03, 0.08, 0.03, mat(GOLD, shared, { roughness: 0.6 }));
-  pathMesh.name = "chemin-entree";
-  root.add(pathMesh);
+  // l'allée en or, « c'est par ici » : du portail, à travers le parking, puis
+  // le long de la galerie jusqu'à la porte de Villa Joell
+  const gold = mat(GOLD, shared, { roughness: 0.6 });
+  const gx = (ENCLOSURE.gate[0] + ENCLOSURE.gate[1]) / 2;
+  for (const [r, name] of [
+    [[gx - 0.6, 8.2, 1.2, ENCLOSURE.z1 - 8.2], "chemin-entree"],
+    [[3.4, 7, gx - 3.4 + 0.6, 1.2], "chemin-villa-joell"],
+  ] as [Rect, string][]) {
+    const m = onRect(r, 0.03, 0.08, 0.03, gold);
+    m.name = name;
+    root.add(m);
+  }
 
   // mur d'enceinte tout autour de l'école, ouvert sur le portail devant Villa Joell
   const { x0, z0, x1, z1, height, gate } = ENCLOSURE;

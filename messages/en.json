@@ -170,7 +170,9 @@
     "advice": "Advice",
     "voice": "Testimony",
     "contact": "Contact",
-    "campus": "The campus"
+    "campus": "The campus",
+    "tools": "Tools",
+    "figures": "Numbers"
   },
   "orbit": {
     "kicker": "THE HEI TRIBE · AMBODIVOANJO, IVANDRY",
@@ -217,7 +219,7 @@
     "steps": {
       "0": "Bird's-eye view",
       "1": "Half-turn above the school",
-      "2": "The entrance: Villa Joell",
+      "2": "The entrance, through the gate",
       "3": "Lifting the roof",
       "4": "Your turn: tap a room"
     },
@@ -242,5 +244,57 @@
       "outdoor": "Outdoors",
       "circulation": "Circulation"
     }
+  },
+  "tools": {
+    "kicker": "THE TOOLS TO KNOW",
+    "titleA": "Four tools are enough for",
+    "titleIt": "your first week.",
+    "lead": "What you'll open every day at HEI. Flip a card to read the older students' tip.",
+    "tipLabel": "THE TIP",
+    "showTip": "The tip",
+    "back": "Back",
+    "workspace": {
+      "name": "Google Workspace",
+      "what": "Your online office: forms, shared documents, assignment submissions and remote classes.",
+      "tags": "FORMS · DOCS · DRIVE · MEET",
+      "tip": "One Drive folder per course from day one, and you'll find everything in ten seconds at the end of the semester."
+    },
+    "web": {
+      "name": "HTML/CSS and Mimo",
+      "what": "Web basics, the ones the LEI project uses. Mimo, the app to practise a little every day.",
+      "tags": "HTML · CSS · MIMO",
+      "tip": "Ten minutes of Mimo on the bus are worth more than an all-nighter before the deadline."
+    },
+    "ai": {
+      "name": "AI, your mentor",
+      "what": "To understand an error, a concept, an exercise. Not to do it for you.",
+      "tags": "EXPLAIN · REPHRASE · CHECK",
+      "tip": "Ask \"explain why\", never \"do it\". What you understand, you keep for the exam."
+    },
+    "intranet": {
+      "name": "The HEI intranet",
+      "what": "Timetable, rooms, announcements, grades: everything about your studies.",
+      "tags": "ADMIN.HEI.SCHOOL",
+      "tip": "A quick look every morning before you leave: that's where you learn a class has moved."
+    }
+  },
+  "figures": {
+    "kicker": "THE TRIBE IN NUMBERS",
+    "titleA": "Ten months after the Bachelor's, 3 graduates in 4",
+    "titleIt": "work, study or run a business.",
+    "studentsLabel": "STUDENTS",
+    "yearsLabel": "IN EXISTENCE",
+    "yearsUnit": "years",
+    "chartTitle": "Situation of the Mpamakilay graduates, 10 months after graduation",
+    "chartSub": "AS % OF THE CLASS",
+    "alumni": {
+      "job": "Employed in a company",
+      "masterAbroad": "Master's abroad",
+      "masterMada": "Master's in Madagascar",
+      "founder": "Started a business",
+      "searching": "Looking for a job",
+      "unknown": "Unknown"
+    },
+    "source": "SOURCES: HEI.SCHOOL (STUDENTS, YEARS) · HEI INFOGRAPHIC \"SITUATION OF THE MPAMAKILAY GRADUATES, 10 MONTHS AFTER GRADUATION\""
   }
 }

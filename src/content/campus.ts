@@ -17,7 +17,7 @@
  *         Sigma s'étalent de Villa Joell jusqu'aux toilettes et forment un L
  *         avec NP (au-dessus de la salle B).
  *   Devant : pas de cour, un parking à motos de la taille de Villa Joell,
- *         centré le long de la salle B, à 2 m d'elle (la galerie).
+ *         vers le centre, dans l'axe du portail.
  *   Toit : le fameux Rooftop, c'est TOUT le toit, au-dessus de PI, Sigma et NP.
  * Recoupé avec la photo du campus publiée par HEI (public/hei/) : véranda en
  * L à garde-corps noirs, galerie à poteaux sous l'aile de droite, toile tendue
@@ -82,7 +82,7 @@ export const CANOPY: Rect = [3, 0.6, 14, 5.8];
 
 /** Mur d'enceinte autour de l'école, avec le portail (ouverture) devant Villa Joell.
  *  PLACEHOLDER : tracé et hauteur estimés. */
-export const ENCLOSURE = { x0: -2, z0: -2, x1: 33, z1: 17.5, height: 2.2, gate: [0.5, 7.5] as [number, number] };
+export const ENCLOSURE = { x0: -2, z0: -2, x1: 33, z1: 17.5, height: 2.2, gate: [10.5, 17.5] as [number, number] }; // portail dans l'axe du parking
 
 /** Véranda du 1er étage, en L, côté parking : devant PI et Sigma, puis devant NP.
  *  Au RDC, des poteaux la portent (galerie). PLACEHOLDER : largeurs estimées. */
@@ -146,10 +146,10 @@ export const ROOMS: Room[] = [
     kind: "outdoor",
     name: { fr: "Parking motos", en: "Motorbike parking" },
     desc: {
-      fr: "Pas de cour à HEI : le parking des deux-roues longe la salle B, à deux mètres d'elle. Scooters, motos de compétition, roadsters : gare-toi droit, nez vers l'extérieur, et laisse l'allée du milieu libre.",
-      en: "There's no courtyard at HEI: the two-wheeler parking runs alongside Room B, two metres from it. Scooters, racing bikes, roadsters: park straight, nose facing out, and keep the middle aisle clear.",
+      fr: "Pas de cour à HEI : le parking des deux-roues est juste derrière le portail, dans son axe. Scooters, motos de compétition, roadsters, et au milieu un Toyota Fortuner : gare-toi droit, nez vers l'extérieur.",
+      en: "There's no courtyard at HEI: the two-wheeler parking is right behind the gate, in line with it. Scooters, racing bikes, roadsters, and a Toyota Fortuner in the middle: park straight, nose facing out.",
     },
-    rect: [13, 9, 9, 7], // mêmes dimensions que Villa Joell, centré sur la façade de B (x = 24), 2 m d'écart
+    rect: [9.5, 9, 9, 7], // mêmes dimensions que Villa Joell, vers le centre, dans l'axe du portail
   },
 
   // ─── 1er étage ───
