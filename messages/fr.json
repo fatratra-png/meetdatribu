@@ -27,7 +27,7 @@
   "home": {
     "kicker": "LEI 2026 · LE GUIDE DE SURVIE À HEI",
     "title": "Bienvenue dans la Tribu",
-    "lead": "Le site arrive scène par scène. Phase 1 : le socle est en place."
+    "lead": "Phase 2 : le verre est en place. La suite arrive scène par scène."
   },
   "astuces": {
     "kicker": "TOUTES LES ASTUCES",
@@ -40,5 +40,45 @@
   "notFound": {
     "title": "Cette page s'est perdue sur le campus.",
     "back": "Retour à l'accueil"
+  },
+  "glass": {
+    "label": "Découvrir HEI",
+    "fallbackAlt": "Le symbole de HEI, deux crochets dorés, rendu en verre",
+    "s1": {
+      "kicker": "LEI 2026 · LE GUIDE DE SURVIE À HEI",
+      "l1": "Bienvenue dans",
+      "l2": "la Tribu.",
+      "lead": "Meet da Tribu, c'est le guide que les anciens auraient aimé recevoir. Tout ce qu'il faut pour réussir tes premières semaines à HEI."
+    },
+    "s2": {
+      "l1": "Cap sur l'emploi,",
+      "l2": "sur 4 piliers.",
+      "mission": {
+        "title": "La mission.",
+        "text": "L'IA, la cyber et le code, pour l'emploi à Madagascar."
+      },
+      "domains": {
+        "title": "Trois domaines.",
+        "text": "Cloud et cybersécurité, IA, ingénierie logicielle."
+      },
+      "tracks": {
+        "title": "Deux parcours.",
+        "text": "Écosystème Logiciel ou Transformation Numérique."
+      },
+      "approach": {
+        "title": "Une approche.",
+        "text": "Projets, TD, hybride et entreprise."
+      }
+    },
+    "s3": {
+      "l1": "Une base commune,",
+      "l2": "deux parcours.",
+      "desc": "Tout le monde commence par les fondements de la programmation, en Java et JavaScript. Ensuite, deux voies : Écosystème Logiciel pour construire des applications robustes et sécurisées, Transformation Numérique pour faire parler les données au service des entreprises."
+    },
+    "s4": {
+      "l1": "Ici, on apprend",
+      "l2": "en construisant.",
+      "desc": "Chaque notion théorique s'accompagne d'un projet pratique. Au bout de trois ans dans le système LMD : une Licence en Informatique reconnue par le MESupRES."
+    }
   }
 }

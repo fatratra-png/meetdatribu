@@ -27,7 +27,7 @@
   "home": {
     "kicker": "LEI 2026 · THE HEI SURVIVAL GUIDE",
     "title": "Welcome to the Tribe",
-    "lead": "The site arrives scene by scene. Phase 1: the foundation is in place."
+    "lead": "Phase 2: the glass is in place. The rest arrives scene by scene."
   },
   "astuces": {
     "kicker": "ALL THE TIPS",
@@ -40,5 +40,45 @@
   "notFound": {
     "title": "This page got lost on campus.",
     "back": "Back to home"
+  },
+  "glass": {
+    "label": "Discover HEI",
+    "fallbackAlt": "The HEI symbol, two golden brackets, rendered in glass",
+    "s1": {
+      "kicker": "LEI 2026 · THE HEI SURVIVAL GUIDE",
+      "l1": "Welcome to",
+      "l2": "the Tribe.",
+      "lead": "Meet da Tribu is the guide older students wish they had been given. Everything you need to make your first weeks at HEI count."
+    },
+    "s2": {
+      "l1": "Built for jobs,",
+      "l2": "on 4 pillars.",
+      "mission": {
+        "title": "The mission.",
+        "text": "AI, cyber and code, for jobs in Madagascar."
+      },
+      "domains": {
+        "title": "Three fields.",
+        "text": "Cloud and cybersecurity, AI, software engineering."
+      },
+      "tracks": {
+        "title": "Two tracks.",
+        "text": "Software Ecosystem or Digital Transformation."
+      },
+      "approach": {
+        "title": "One approach.",
+        "text": "Projects, tutorials, hybrid and companies."
+      }
+    },
+    "s3": {
+      "l1": "One foundation,",
+      "l2": "two tracks.",
+      "desc": "Everyone starts with programming fundamentals, in Java and JavaScript. Then two paths: Software Ecosystem to build robust, secure applications, and Digital Transformation to make data work for businesses."
+    },
+    "s4": {
+      "l1": "Here, you learn",
+      "l2": "by building.",
+      "desc": "Every theoretical concept comes with a hands-on project. After three years in the LMD system: a Bachelor's degree in Computer Science recognised by MESupRES."
+    }
   }
 }

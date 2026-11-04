@@ -1,0 +1,165 @@
+/* ═══════════════════════════════════════════════════════════════
+   SCÈNE DU VERRE — mise en page des 4 chapitres
+   Port de premium-3d-glass/template/css/styles.css (slides, titres,
+   bénéfices, composition portrait). Valeurs du skill conservées.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* La scène reste sombre dans les deux thèmes : le verre ne vit que s'il a
+   de la lumière colorée sur fond noir derrière lui (voir DECISIONS.md). */
+.stage-dark {
+  --ink-rgb: 244, 241, 234;
+  --ink: #f4f1ea;
+  --ink-soft: #c9d0de;
+  --hairline: rgba(244, 241, 234, 0.14);
+  color: var(--ink);
+  background: #000510;
+}
+
+.glass-stage { position: relative; height: 900vh; }
+.glass-anchor { position: absolute; left: 0; top: 30%; width: 1px; height: 1px; }
+
+.glass-sticky {
+  position: sticky; top: 0;
+  height: 100vh; height: 100lvh;
+  overflow: hidden;
+}
+.glass-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block; outline: none;
+}
+
+.glass-slides { position: absolute; inset: 0; pointer-events: none; }
+.glass-slide { position: absolute; bottom: 12%; }
+.glass-slide.active { pointer-events: auto; }
+
+#slide-1 { left: var(--gutter); width: min(56vw, 900px); bottom: 15%; }
+#slide-1 .glass-desc { max-width: calc(40vw - 60px); }
+#slide-2 { left: calc(50vw + 20px); right: var(--gutter); }
+#slide-3 { left: var(--gutter); width: min(620px, 46vw); bottom: 10%; }
+#slide-4 { left: var(--gutter); max-width: 640px; }
+#slide-4 .glass-desc { max-width: 44ch; }
+
+.glass-kicker {
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  opacity: 0; transition: opacity 0.8s ease-out;
+}
+.glass-slide.active .glass-kicker { opacity: 1; }
+
+.glass-title {
+  font-size: clamp(44px, 5.4vw, 80px);
+  line-height: 1.0;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  margin-bottom: 22px;
+}
+/* Révélation du titre : chaque ligne monte de son masque (ease expo longue). */
+.glass-title .line {
+  display: block; overflow: hidden; white-space: nowrap;
+  padding: 0.06em 0 0.16em; margin: -0.06em 0 -0.16em;
+}
+.glass-title .line.muted { color: #b9c1d1; }
+.line-inner {
+  display: block; transform: translateY(112%); opacity: 0; filter: blur(12px);
+  transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease-out,
+              filter 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.line.muted .line-inner { transition-delay: 0.09s; }
+.glass-slide.active .line-inner { transform: none; opacity: 1; filter: blur(0); }
+
+.glass-desc {
+  font-size: 16px; line-height: 1.7; font-weight: 300;
+  color: var(--ink-soft); letter-spacing: 0.3px;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.3s;
+}
+.glass-slide.active .glass-desc { opacity: 1; transform: translateY(0); }
+
+/* Chapitre 2 : les quatre piliers, icône d'abord (les « benefits » du skill) */
+.glass-pillars {
+  list-style: none; display: grid;
+  grid-template-columns: repeat(2, minmax(0, 260px));
+  gap: 26px 40px; margin-top: 10px;
+}
+.glass-pillar {
+  display: flex; align-items: flex-start; gap: 14px;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-pillar:nth-child(1) { transition-delay: 0.28s; }
+.glass-pillar:nth-child(2) { transition-delay: 0.36s; }
+.glass-pillar:nth-child(3) { transition-delay: 0.44s; }
+.glass-pillar:nth-child(4) { transition-delay: 0.52s; }
+.glass-slide.active .glass-pillar { opacity: 1; transform: none; }
+.glass-pillar-icon {
+  flex: 0 0 30px; width: 30px; height: 30px; border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: grid; place-items: center;
+}
+.glass-pillar p { font-size: 14px; line-height: 1.5; font-weight: 300; color: var(--ink-soft); }
+.glass-pillar strong { font-weight: 500; color: var(--ink); }
+
+/* ═══ Portrait / écrans étroits : composition empilée ═══
+   Texte en haut et objet en bas aux chapitres 1 et 3 ; objet en haut et
+   texte en bas aux chapitres 2 et 4 (cameraFrame suit la même alternance). */
+@media (max-width: 900px), (max-aspect-ratio: 4/5) {
+  .glass-slide, #slide-1, #slide-2, #slide-3, #slide-4 {
+    left: var(--gutter); right: var(--gutter); width: auto; max-width: none; bottom: auto;
+  }
+  #slide-1, #slide-3 { top: 98px; bottom: auto; }
+  #slide-2, #slide-4 { bottom: 6%; top: auto; }
+  .glass-title { margin-bottom: 14px; font-size: clamp(34px, 10vw, 64px); }
+  #slide-1 .glass-desc { max-width: 36ch; }
+  .glass-pillars { grid-template-columns: 1fr 1fr; gap: 16px 14px; }
+  .glass-pillar { gap: 10px; }
+  .glass-pillar-icon { flex-basis: 26px; width: 26px; height: 26px; border-radius: 6px; }
+  .glass-pillar p { font-size: 13px; line-height: 1.45; }
+  /* En portrait, le texte des piliers ferait monter le bloc jusque dans les
+     fragments : on n'affiche que leur nom (le détail reste lu par les lecteurs
+     d'écran, et il est repris aux chapitres 3 et 4). */
+  .glass-stage:not(.is-static) .glass-pillar-text {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap;
+  }
+  .glass-stage:not(.is-static) .glass-pillar { align-items: center; }
+  .glass-desc { font-size: 15px; line-height: 1.6; max-width: 36ch; }
+}
+
+/* ═══ Mode statique : mouvement réduit ou pas de WebGL ═══
+   Tout est lisible d'un coup : image du verre, puis les 4 chapitres empilés. */
+.glass-fallback {
+  display: grid; place-items: center;
+  padding: 120px var(--gutter) 0;
+}
+.glass-fallback img { width: min(100%, 560px); height: auto; }
+
+.glass-stage.is-static { height: auto; }
+.glass-stage.is-static .glass-sticky { position: static; height: auto; overflow: visible; }
+.glass-stage.is-static .glass-slides {
+  position: static; display: grid; gap: 72px;
+  padding: 48px var(--gutter) 96px;
+}
+.glass-stage.is-static .glass-slide,
+.glass-stage.is-static #slide-1, .glass-stage.is-static #slide-2,
+.glass-stage.is-static #slide-3, .glass-stage.is-static #slide-4 {
+  position: static; width: auto; max-width: 56rem; pointer-events: auto;
+}
+.glass-stage.is-static .glass-anchor { top: auto; }
+.glass-stage.is-static .line-inner,
+.glass-stage.is-static .glass-desc,
+.glass-stage.is-static .glass-kicker,
+.glass-stage.is-static .glass-pillar { opacity: 1; transform: none; filter: none; }
+.glass-stage.is-static .glass-title .line { white-space: normal; }
+
+/* Mouvement réduit : la même mise en page statique, même avant le JS. */
+@media (prefers-reduced-motion: reduce) {
+  .glass-stage.is-pending { height: auto; }
+  .glass-stage.is-pending .glass-sticky { position: static; height: auto; }
+  .glass-stage.is-pending .glass-slides { position: static; display: grid; gap: 72px; padding: 120px var(--gutter) 96px; }
+  .glass-stage.is-pending .glass-slide { position: static; width: auto; }
+  .glass-stage.is-pending .line-inner,
+  .glass-stage.is-pending .glass-desc,
+  .glass-stage.is-pending .glass-pillar { opacity: 1; transform: none; filter: none; }
+}
