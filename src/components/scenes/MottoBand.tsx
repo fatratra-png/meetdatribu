@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { clamp, mix, seg, useScene } from "@/lib/scene";
+import "./motto.css";
 
 const KEYS = ["w1", "w2", "w3"] as const;
 
@@ -73,7 +74,7 @@ export default function MottoBand() {
   });
 
   return (
-    <div className="band">
+    <div className="band" data-chapter="motto">
       <div className="diag to-accent" aria-hidden="true" />
       <section ref={ref} className="scene s-motto" style={{ "--pin": 4 } as React.CSSProperties} aria-labelledby="motto-kicker">
         <div className="pin">

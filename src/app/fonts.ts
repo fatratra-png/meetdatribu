@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { DM_Mono } from "next/font/google";
+import { DM_Mono, Instrument_Serif } from "next/font/google";
 
 // Space Grotesk : la grotesque des titres, fournie avec le skill verre
 // (licence OFL, voir README). Chargée en local par next/font.
@@ -20,5 +20,15 @@ export const dmMono = DM_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-dm-mono",
+  display: "swap",
+});
+
+// Instrument Serif italique : UN mot par titre, pour la voix « humaine »
+// (titres mixtes grotesque + serif italique). Voir DECISIONS.md, refonte.
+export const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
+  variable: "--font-serif",
   display: "swap",
 });

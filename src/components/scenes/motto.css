@@ -1,0 +1,57 @@
+/* ═══════════════════════════════════════════════════════════════
+   BANDE DEVISE — conservée telle quelle (skill Site Immersif) :
+   Penser, Travailler, Impacter sur l'or HEI.
+   ═══════════════════════════════════════════════════════════════ */
+/* ═══════════ BANDE DEVISE (accent) ═══════════ */
+.band { position: relative; z-index: 3; }
+.diag { height: 12vw; position: relative; margin: -1px 0; }
+.to-accent   { background: linear-gradient(to bottom right, transparent 49.7%, var(--accent) 50.3%); }
+.from-accent { background: linear-gradient(to bottom right, var(--accent) 49.7%, transparent 50.3%); }
+.s-motto .pin { background: var(--accent); overflow: hidden; }
+.motto-kicker {
+  position: absolute; top: 13vh; left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent-ink); opacity: 0.8;
+  white-space: nowrap;
+}
+.motto-track {
+  position: absolute; top: 50%; left: 0;
+  display: flex; align-items: baseline;
+  gap: 7vw;
+  white-space: nowrap;
+  will-change: transform;
+  transform: translate(0, -50%);
+}
+.mw {
+  font-weight: 300;
+  font-size: clamp(96px, 16vw, 250px);
+  letter-spacing: -0.02em; line-height: 1;
+  color: var(--accent-ink);
+  will-change: opacity;
+}
+.mw .sc { display: inline-block; will-change: transform; }
+.motto-hint {
+  position: absolute; bottom: 14vh; left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent-ink);
+  transition: opacity .25s;
+  text-align: center;
+  max-width: 80vw;
+}
+.motto-hint.swap { opacity: 0; }
+
+.motto-hints { display: none; list-style: none; margin-top: 18px; color: var(--accent-ink); }
+
+body.static .s-motto .pin { padding: 12vh var(--gutter); }
+body.static .motto-kicker { position: static; transform: none; margin-bottom: 26px; }
+body.static .motto-track { position: static; transform: none !important; flex-direction: column; align-items: flex-start; gap: 12px; white-space: normal; }
+body.static .mw { opacity: 1 !important; font-size: clamp(56px, 13vw, 110px); }
+body.static .mw .sc { transform: none !important; }
+body.static .motto-hint { display: none; }
+body.static .motto-hints { display: block; }
+
+@media (max-width: 900px) {
+  .mw { font-size: clamp(40px, 13vw, 68px); }
+  body.static .s-motto .pin { padding: 8vh var(--gutter); }
+  body.static .mw { font-size: clamp(46px, 17vw, 92px) !important; }
+}

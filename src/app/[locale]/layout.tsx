@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { grotesk, dmMono } from "../fonts";
+import { grotesk, dmMono, serif } from "../fonts";
 import Header from "@/components/ui/Header";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import MotionProvider from "@/components/ui/MotionProvider";
 import ThemeScript from "@/components/ui/ThemeScript";
 import Loader from "@/components/scenes/Loader";
-import FooterGiant from "@/components/scenes/FooterGiant";
+import FooterCta from "@/components/scenes/FooterCta";
+import ChapterIndex from "@/components/ui/ChapterIndex";
 import "../globals.css";
 
 export const SITE_URL = "https://meetdatribu.vercel.app";
@@ -59,7 +60,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     <html
       lang={locale}
       data-theme="dark"
-      className={`${grotesk.variable} ${dmMono.variable}`}
+      className={`${grotesk.variable} ${dmMono.variable} ${serif.variable}`}
       suppressHydrationWarning
     >
       <body>
@@ -73,7 +74,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             <SmoothScroll />
             <Header />
             <main id="contenu">{children}</main>
-            <FooterGiant />
+            <FooterCta />
+            <ChapterIndex />
           </MotionProvider>
         </NextIntlClientProvider>
       </body>

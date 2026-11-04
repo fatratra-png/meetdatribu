@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { easeInOut, easeOut, seg, useScene } from "@/lib/scene";
+import { easeOut, seg, useScene } from "@/lib/scene";
 
 /**
- * Témoignage (skill Site Immersif) : guillemet, parole, filet, signature —
- * dans cet ordre. Le chiffre monte de 0 SOUS la signature : c'est une pièce
- * à conviction, jamais le sujet. La citation doit se lire seule.
+ * Témoignage : la parole d'un ancien se défloute mot à mot au scroll, puis la
+ * signature monte et le chiffre compte depuis 0. Le chiffre appuie la
+ * parole ; il n'est pas le sujet.
  */
 export default function Testimonial() {
   const t = useTranslations("testimonial");
@@ -17,27 +17,26 @@ export default function Testimonial() {
   const decimals = (t("figure").split(".")[1] || "").length;
   const fmt = (v: number) =>
     v.toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  const words = t("quote").split(" ");
 
   useScene(ref, () => {
     const root = ref.current!;
-    const $ = (s: string) => root.querySelector<HTMLElement>(s)!;
-    const glyph = $(".q-glyph"), text = $(".q-text"), rule = $(".q-rule");
-    const name = $(".q-name"), ctx = $(".q-ctx"), fig = $(".q-fig"), val = $(".fig-val");
+    const ws = [...root.querySelectorAll<HTMLElement>(".qt-text .w")];
+    const sign = root.querySelector<HTMLElement>(".qt-sign")!;
+    const val = root.querySelector<HTMLElement>(".qt-val")!;
     let last = "";
-    const rise = (el: HTMLElement, k: number, dist: number) => {
-      el.style.opacity = k.toFixed(3);
-      el.style.transform = `translateY(${((1 - k) * dist).toFixed(1)}px)`;
-    };
     return {
       update(p) {
-        rise(glyph, seg(p, 0.03, 0.15, easeOut), 28);
-        rise(text, seg(p, 0.11, 0.36, easeOut), 32); // la parole, d'un bloc
-        rule.style.transform = `scaleX(${seg(p, 0.38, 0.58, easeInOut).toFixed(4)})`;
-        rise(name, seg(p, 0.52, 0.64, easeOut), 14);
-        rise(ctx, seg(p, 0.57, 0.69, easeOut), 14);
-        const f = seg(p, 0.58, 0.84, easeOut);
-        fig.style.opacity = Math.min(1, f * 3.5).toFixed(3);
-        const v = fmt(target * f);
+        const span = 0.55 / ws.length;
+        ws.forEach((w, i) => {
+          const k = seg(p, 0.05 + i * span, 0.05 + i * span + 0.12, easeOut);
+          w.style.opacity = (0.12 + k * 0.88).toFixed(3);
+          w.style.filter = `blur(${((1 - k) * 8).toFixed(2)}px)`;
+        });
+        const s = seg(p, 0.62, 0.74, easeOut);
+        sign.style.opacity = s.toFixed(3);
+        sign.style.transform = `translateY(${((1 - s) * 16).toFixed(1)}px)`;
+        const v = fmt(target * seg(p, 0.66, 0.9, easeOut));
         if (v !== last) {
           val.textContent = v;
           last = v;
@@ -47,26 +46,37 @@ export default function Testimonial() {
   });
 
   return (
-    <section ref={ref} id="temoignage" className="scene s-quote" style={{ "--pin": 3 } as React.CSSProperties} aria-label={t("label")}>
+    <section
+      ref={ref}
+      id="temoignage"
+      data-chapter="voice"
+      className="scene s-quote"
+      style={{ "--pin": 3 } as React.CSSProperties}
+      aria-label={t("label")}
+    >
       <div className="pin">
-        <figure className="q-stack">
-          <span className="q-glyph" aria-hidden="true">
-            “
-          </span>
-          <blockquote>
-            <p className="q-text">{t("quote")}</p>
+        <figure className="qt">
+          <p className="label mono">{t("kicker")}</p>
+          <blockquote className="qt-text it">
+            <span className="sr-only">{t("quote")}</span>
+            <span aria-hidden="true">
+              {words.map((w, i) => (
+                <Fragment key={i}>
+                  {i > 0 && " "}
+                  <span className="w">{w}</span>
+                </Fragment>
+              ))}
+            </span>
           </blockquote>
-          <figcaption className="q-sign">
-            <span className="q-rule" aria-hidden="true" />
-            <div className="q-sign-row">
-              <p className="q-name">{t("author")}</p>
-              <p className="q-ctx mono">{t("context")}</p>
-              <p className="q-fig">
-                <span className="fig-pre">{t("prefix")}</span>
-                <span className="fig-val">{fmt(target)}</span>
-                <span className="fig-unit">{t("unit")}</span>
-              </p>
+          <figcaption className="qt-sign">
+            <div>
+              <p className="qt-name">{t("author")}</p>
+              <p className="qt-ctx mono">{t("context")}</p>
             </div>
+            <p className="qt-fig">
+              <span className="qt-val">{fmt(target)}</span>
+              <small>{t("unit")}</small>
+            </p>
           </figcaption>
         </figure>
       </div>

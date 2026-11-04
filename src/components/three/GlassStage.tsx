@@ -137,6 +137,7 @@ export default function GlassStage() {
     <section
       ref={stageRef}
       className={`glass-stage stage-dark is-${mode}`}
+      data-chapter="discover"
       aria-label={t("label")}
     >
       {/* ancre du lien « Découvrir HEI » : le début de l'éclatement */}

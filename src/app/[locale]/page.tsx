@@ -1,25 +1,24 @@
 import { use } from "react";
 import { setRequestLocale } from "next-intl/server";
 import GlassStage from "@/components/three/GlassStage";
-import HeroCloud from "@/components/scenes/HeroCloud";
-import BladeCurtain from "@/components/scenes/BladeCurtain";
+import OrbitTribe from "@/components/scenes/OrbitTribe";
+import Timeline from "@/components/scenes/Timeline";
 import MottoBand from "@/components/scenes/MottoBand";
-import Manifesto from "@/components/scenes/Manifesto";
-import Objections from "@/components/scenes/Objections";
+import AdviceDeck from "@/components/scenes/AdviceDeck";
 import Testimonial from "@/components/scenes/Testimonial";
 
 /**
  * Page d'accueil : l'expérience principale, scrubée au scroll.
  * Ordre (pyramid-storyline-builder) :
  *   1. Accueil + Découvrir HEI — le verre (le symbole HEI, ses 4 piliers)
- *   2. La Tribu — le nuage de photos (on passe de l'école aux gens)
- *   3. Se repérer — le rideau de lames, une étape par moment clé
+ *   2. La Tribu — l'anneau de photos (on passe de l'école aux gens)
+ *   3. Se repérer — la frise des 4 repères
  *   4. Les outils — cartes interactives (phase 4)
  *   5. La devise — Penser, Travailler, Impacter
- *   6. Les bons conseils — manifeste, puis objections (« Pas de… »)
+ *   6. Les bons conseils — le paquet de cartes
  *   7. La Tribu en chiffres (phase 4)
  *   8. Témoignage
- * Le footer est dans le layout (commun à toutes les pages).
+ * Le footer et l'index des chapitres sont dans le layout.
  */
 export default function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = use(params);
@@ -28,11 +27,10 @@ export default function HomePage({ params }: PageProps<"/[locale]">) {
   return (
     <>
       <GlassStage />
-      <HeroCloud />
-      <BladeCurtain />
+      <OrbitTribe />
+      <Timeline />
       <MottoBand />
-      <Manifesto />
-      <Objections />
+      <AdviceDeck />
       <Testimonial />
     </>
   );

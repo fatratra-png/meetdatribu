@@ -80,40 +80,39 @@
       "desc": "Every theoretical concept comes with a hands-on project. After three years in the LMD system: a Bachelor's degree in Computer Science recognised by MESupRES."
     }
   },
-  "cloud": {
-    "kicker": "THE HEI TRIBE · AMBODIVOANJO, IVANDRY",
-    "line1": "Before your first class,",
-    "line2a": "there is",
-    "line2b": "the Tribe.",
-    "positioning": "Over 350 students, one family.",
-    "imageAlt": "Hundreds of HEI students dancing together in the courtyard during the 2024 welcome week"
-  },
   "reperes": {
-    "w1": "Your",
-    "w2": "start,",
-    "w3": "4 markers.",
-    "imageAlt": "The HEI building in Ivandry, with its courtyard and white walkways",
     "s1": {
+      "big": "D-1",
       "meta": "BEFORE DAY 1 · THE CAMPUS",
       "title": "Find the campus before day one.",
-      "desc": "II J 161 R, Ambodivoanjo, Ivandry. The front desk is open Monday to Friday, 8am-12pm and 1pm-4pm."
+      "desc": "II J 161 R, Ambodivoanjo, Ivandry. The front desk is open Monday to Friday, 8am-12pm and 1pm-4pm.",
+      "imageAlt": "The HEI building in Ivandry, with its courtyard and white walkways"
     },
     "s2": {
+      "big": "D1",
       "meta": "DAY 1 · THE WELCOME",
       "title": "On day one, it all starts at the front desk.",
-      "desc": "Arrive early, introduce yourself, save your classmates' contacts. Now is the time for the \"silly\" questions."
+      "desc": "Arrive early, introduce yourself, save your classmates' contacts. Now is the time for the \"silly\" questions.",
+      "imageAlt": "HEI students in orange T-shirts around an HEI sign"
     },
     "s3": {
+      "big": "W1-2",
       "meta": "WEEKS 1 AND 2 · THE LEI",
       "title": "The LEI sets your foundations in two weeks.",
-      "desc": "L'École d'Informatique, mandatory for every first-year: the tools, HTML/CSS, and your class. The final project: your own survival guide."
+      "desc": "L'École d'Informatique, mandatory for every first-year: the tools, HTML/CSS, and your class. The final project: your own survival guide.",
+      "imageAlt": "New students gathered in the courtyard during the welcome week"
     },
     "s4": {
+      "big": "+",
       "meta": "AFTER THAT · GETTING ORGANISED",
       "title": "The intranet runs your days.",
-      "desc": "Classes, rooms, announcements: everything goes through the intranet and Google Workspace. Make checking it a morning habit."
+      "desc": "Classes, rooms, announcements: everything goes through the intranet and Google Workspace. Make checking it a morning habit.",
+      "imageAlt": "An HEI classroom during a presentation"
     },
-    "cta": "All the tips →"
+    "cta": "All the tips",
+    "kicker": "FIND YOUR WAY · 4 MARKERS",
+    "titleA": "Your start in",
+    "titleIt": "four steps."
   },
   "motto": {
     "kicker": "HEI'S MOTTO",
@@ -130,18 +129,6 @@
       "hint": "CHANGE THINGS, IN MADAGASCAR AND BEYOND"
     }
   },
-  "manifesto": {
-    "kicker": "GOOD ADVICE · WHAT I WISH I HAD KNOWN",
-    "text": "Nobody is waiting for you to fail. Ask early, pair up, and [[ask for help]] before you get lost. That's what the Tribe is for."
-  },
-  "objections": {
-    "label": "What the Tribe promises you",
-    "no1": "No stupid questions.",
-    "no2": "No shame in being stuck.",
-    "no3": "No forced solo work.",
-    "finale": "Just you, with",
-    "pill": "the Tribe."
-  },
   "testimonial": {
     "label": "A graduate's testimony",
     "quote": "I landed my first job during my internship. In interviews, I had code to show: all my HEI projects.",
@@ -149,14 +136,77 @@
     "context": "OF THE CLASS IN A JOB, 10 MONTHS AFTER GRADUATION",
     "prefix": "",
     "figure": "41.9",
-    "unit": "%"
+    "unit": "%",
+    "kicker": "A GRADUATE'S VOICE"
   },
   "footer": {
-    "kicker": "A QUESTION BEFORE YOU START?",
-    "hours": "MON-FRI 8AM-12PM / 1PM-4PM",
-    "credit": "Made by {name}, LEI 2026 teaching assistant",
-    "socialLabel": "HEI on social media",
+    "titleA": "Join",
+    "titleIt": "the Tribe.",
+    "lead": "Meet da Tribu gathers what older students wish they had known when they arrived at HEI. Free, no account, in French and English.",
+    "ctaTips": "All the tips",
+    "ctaIntranet": "Open the intranet",
+    "ctaMail": "Email HEI",
     "newTab": "(new tab)",
-    "rights": "Photos and logo © HEI"
+    "tagline": "The HEI survival guide, made during LEI 2026.",
+    "guide": "The guide",
+    "lDiscover": "Discover HEI",
+    "lFind": "Find your way",
+    "lAdvice": "Good advice",
+    "lTips": "All the tips",
+    "lTribe": "Team and partners",
+    "hours": "Mon-Fri, 8am-12pm and 1pm-4pm",
+    "socialLabel": "Social",
+    "credit": "Made by {name}, LEI 2026 teaching assistant",
+    "rights": "Photos and logo © HEI",
+    "place": "Antananarivo, Madagascar",
+    "giant": "TRIBU"
+  },
+  "chapters": {
+    "label": "Page chapters",
+    "discover": "Discover HEI",
+    "tribe": "The Tribe",
+    "find": "Find your way",
+    "motto": "The motto",
+    "advice": "Advice",
+    "voice": "Testimony",
+    "contact": "Contact"
+  },
+  "orbit": {
+    "kicker": "THE HEI TRIBE · AMBODIVOANJO, IVANDRY",
+    "titleA": "Before your first class, there is",
+    "titleIt": "the Tribe.",
+    "lead": "Over 350 students, clubs, hackathons, a class that helps each other. You are joining a family.",
+    "imageAlt": "Hundreds of HEI students dancing together in the courtyard during the 2024 welcome week",
+    "say": "Over 350 students, one family."
+  },
+  "advice": {
+    "kicker": "GOOD ADVICE",
+    "titleA": "What I wish I had",
+    "titleIt": "known.",
+    "a1": {
+      "quote": "I was afraid to ask questions.",
+      "title": "Ask them early.",
+      "text": "Nobody is waiting for you to fail: one question in week one saves you ten later."
+    },
+    "a2": {
+      "quote": "I coded alone in my corner.",
+      "title": "Work in pairs.",
+      "text": "Explaining your code to someone is the best debugger. That's what the Tribe is for."
+    },
+    "a3": {
+      "quote": "I found the intranet too late.",
+      "title": "Open the intranet every morning.",
+      "text": "Classes, rooms, announcements: it all goes through there. Two minutes a day is enough."
+    },
+    "a4": {
+      "quote": "I copied the AI's answers.",
+      "title": "Make AI your mentor.",
+      "text": "Ask it to explain, not to do it for you. What you understand, you keep."
+    },
+    "a5": {
+      "quote": "I waited to feel ready before coding.",
+      "title": "Code a little every day.",
+      "text": "A Mimo exercise, an HTML page, a small project: consistency beats intensity."
+    }
   }
 }

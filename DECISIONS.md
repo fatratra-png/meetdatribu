@@ -118,3 +118,37 @@ une ambiguïté. Format : décision · pourquoi.
 32. **Accessibilité des textes découpés** : le manifeste et la devise sont
     découpés en lettres pour l'animation ; une version entière est donnée aux
     lecteurs d'écran (`sr-only` / `aria-label`).
+
+## Refonte des animations (demande du 4 nov. 2026)
+
+Les scènes de la phase 3 ressemblaient trop à zahavania.vercel.app, construit
+avec le même skill Site Immersif. Les décisions 22 à 31 sont remplacées par
+celles-ci. Conservés tels quels : le verre 3D (phase 2) et la bande devise
+« Penser, Travailler, Impacter » (`motto.css`).
+
+33. **Nouveau langage** inspiré de checky-mg.vercel.app et getartcraft.com
+    (observés en captures, rien copié : ni code, ni texte, ni image) : titres
+    mixtes grotesque + UN mot en serif italique (Instrument Serif), étiquettes
+    mono précédées d'un filet, index des chapitres à droite, filets fins.
+34. **Barre de navigation** pleine largeur (wordmark en capitales + crochets
+    HEI, CTA en pilule d'or) qui se cache en descendant, revient en remontant.
+    Remplace le « dock » en pilule du skill.
+35. **Loader** : les deux crochets du logo HEI se dessinent, compteur 00 → 100,
+    puis les crochets s'écartent et le voile se retire vers le haut.
+36. **Index des chapitres** (≥ 1100 px) : lit les sections `data-chapter`, le
+    chapitre courant grossit et son libellé se brouille puis se recompose ;
+    clic = défilement Lenis. En `mix-blend-mode: difference` pour rester
+    lisible sur le verre, l'or et les fonds clairs.
+37. **La Tribu = anneau 3D de photos** (CSS 3D, pas de second contexte WebGL) :
+    14 photos HEI en orbite autour du titre ; l'anneau tourne, se couche,
+    s'élargit hors cadre, puis une photo s'ouvre du centre au plein écran.
+    Portrait : titre en haut, anneau en dessous.
+38. **Se repérer = frise horizontale épinglée** : 4 panneaux (J-1, J1, S1-2, +),
+    rail qui se remplit, repère géant en mono qui monte lettre à lettre.
+39. **Les bons conseils = paquet de cartes** 01 / 05 : la carte du dessus
+    s'envole, la suivante avance. Remplace le manifeste, les objections et la
+    traînée d'images (5 conseils PLACEHOLDER en attendant le Google Form).
+40. **Témoignage** : la parole se défloute mot à mot, puis signature et chiffre.
+41. **Footer** sur le modèle de structure de checky : grand appel « Rejoins
+    la Tribu. », 3 boutons pilule, 4 colonnes de liens, ligne légale, puis le
+    mot TRIBU géant coupé par le bas, qui sort du flou avec un halo doré.
