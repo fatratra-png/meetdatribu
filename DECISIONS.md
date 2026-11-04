@@ -150,5 +150,7 @@ celles-ci. Conservés tels quels : le verre 3D (phase 2) et la bande devise
     traînée d'images (5 conseils PLACEHOLDER en attendant le Google Form).
 40. **Témoignage** : la parole se défloute mot à mot, puis signature et chiffre.
 41. **Footer** sur le modèle de structure de checky : grand appel « Rejoins
-    la Tribu. », 3 boutons pilule, 4 colonnes de liens, ligne légale, puis le
-    mot TRIBU géant coupé par le bas, qui sort du flou avec un halo doré.
+    la Tribu. », 3 boutons pilule, 4 colonnes de liens, ligne légale, puis
+    « HEI LEIS DADA AH » en géant (texte demandé, à la place de « TRIBU »),
+    coupé par le bas, qui sort du flou avec un halo doré. Taille calculée pour
+    15 signes (12,6vw) ; révélé dès son entrée à l'écran.

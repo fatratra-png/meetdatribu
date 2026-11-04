@@ -10,15 +10,30 @@ import "./scenes.css";
 
 /**
  * Footer : un grand appel (« Rejoins la Tribu. »), trois boutons, une grille
- * de liens en 4 colonnes, une ligne légale, puis le mot TRIBU géant, coupé
- * par le bas de l'écran : ses lettres sortent du flou à l'arrivée et un halo
+ * de liens en 4 colonnes, une ligne légale, puis « HEI LEIS DADA AH » en géant, coupé
+ * par le bas de l'écran : ses lettres de « HEI LEIS DADA AH » sortent du flou à l'arrivée et un halo
  * doré glisse derrière au fil du défilement.
  */
 export default function FooterCta() {
   const t = useTranslations("footer");
   const ref = useRef<HTMLElement>(null);
   const giant = useRef<HTMLParagraphElement>(null);
-  useReveal(ref, ".reveal, .foot-giant");
+  useReveal(ref, ".reveal");
+
+  // révélation du texte géant : il est tout en bas de la page, donc il ne
+  // peut pas monter au-dessus du bas de l'écran — on le révèle dès qu'il entre
+  useEffect(() => {
+    const el = giant.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        el.classList.add("in-view");
+        io.disconnect();
+      }
+    }, { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   // halo : sa position suit la fin du défilement (-1 → 1)
   useEffect(() => {
@@ -114,11 +129,16 @@ export default function FooterCta() {
       </div>
 
       <p className="foot-giant" ref={giant} aria-hidden="true">
-        {[...word].map((c, i) => (
-          <span key={i} style={{ "--i": i } as React.CSSProperties}>
-            {c}
-          </span>
-        ))}
+        {[...word].map((c, i) =>
+          // une espace reste un vrai blanc (une espace seule dans un inline-block s'écrase)
+          c === " " ? (
+            " "
+          ) : (
+            <span key={i} style={{ "--i": i } as React.CSSProperties}>
+              {c}
+            </span>
+          ),
+        )}
       </p>
     </footer>
   );
